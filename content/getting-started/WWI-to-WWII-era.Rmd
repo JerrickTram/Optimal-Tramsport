@@ -1,8 +1,8 @@
 ---
-date: "2017-10-17T15:26:15Z"
+date: "2021-09-12T15:26:15Z"
 draft: false
-lastmod: "2019-10-26T15:26:15Z"
-title: Configuration
+lastmod: "2021-09-12T15:26:15Z"
+title: WWI - WWII Era
 weight: 20
 ---
 

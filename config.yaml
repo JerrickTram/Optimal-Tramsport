@@ -1,7 +1,7 @@
 baseURL: https://ise-or-docs.netlify.app/
 languageCode: en-us
 DefaultContentLanguage: en
-title: Industrial Engineering/Operations Research Docs
+title: Industrial Engineering and Operations Research Docs
 theme: hugo-theme-techdoc
 hasCJKLanguage: yes
 metaDataFormat: yaml
@@ -30,7 +30,7 @@ params:
   custom_background_color: ''
   custom_font_color: ''
   dateformat: ''
-  description: The place to learn how to improve processes and decision-making through quantitative and computing methods.
+  description: The place to learn how to improve processes and decision-making through quantitative and other technical means.
   github_doc_repository: https://github.com/JerrickTram/ISE-OR-Docs
   github_repository: https://github.com/JerrickTram
   google_analytics_id: ''
@@ -46,7 +46,7 @@ params:
   menu_style: open-menu
   tag_manager_container_id: ''
   title: TechDoc
-  version: 1.0.3
+  version: 1.0.4
 menu:
   main:
     - name: Home

@@ -1,21 +1,23 @@
 ---
-date: "2017-10-17T15:26:15Z"
+date: "2021-09-12T15:26:15Z"
 description: Text about this post
 draft: false
 images:
 - images/pexels-photo-196666.jpeg
-lastmod: "2018-12-08T15:26:15Z"
-publishdate: "2018-11-23T15:26:15Z"
-title: Getting Started
+lastmod: 2021-09-12T15:26:15Z"
+publishdate: "2021-09-12T15:26:15Z"
+title: History of Industrial Engineering and Operations Research
 weight: 9
 ---
 
-## [Installation](./installation)
+## [Late 1800s - Early 1900s](./late-1800s-to-1900s)
 
 Download Hugo theme, configure, preview site ...
 
-## [Configuration](./configuration)
+## [WWI - WWII Era](./WWI-to-WWII-era)
 
 You may specify options in config.toml (or config.yaml/config.json) of your site to make use of this theme's features.
 
-## [Screenshot](./screenshot)
+## [1950s - Today](./1950s-to-Today)
+
+Stuff

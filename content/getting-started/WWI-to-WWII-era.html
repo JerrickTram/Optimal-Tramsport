@@ -1,0 +1,163 @@
+---
+date: "2021-09-12T15:26:15Z"
+draft: false
+lastmod: "2021-09-12T15:26:15Z"
+title: WWI - WWII Era
+weight: 20
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>You may specify options in config.toml (or config.yaml/config.json) of your site to make use of this theme’s features.</p>
+<p>For an example of <code>config.toml</code>, see <a href="https://github.com/thingsym/hugo-theme-techdoc/blob/master/exampleSite/config.toml">config.toml</a> in exampleSite.</p>
+<div id="params" class="section level2">
+<h2>Params</h2>
+<pre><code># Source Code repository section
+description = &quot;put your description&quot;
+github_repository = &quot;https://github.com/thingsym/hugo-theme-techdoc&quot;
+version = &quot;0.9.7&quot;
+
+# Documentation repository section
+# documentation repository (set edit link to documentation repository)
+github_doc_repository = &quot;https://github.com/thingsym/hugo-theme-techdoc&quot;
+
+# Analytic section
+google_analytics_id = &quot;&quot; # Your Google Analytics tracking id
+tag_manager_container_id = &quot;&quot; # Your Google Tag Manager container id
+google_site_verification = &quot;&quot; # Your Google Site Verification for Search Console
+
+# Open Graph and Twitter Cards settings section
+# Open Graph settings for each page are set on the front matter.
+# See https://gohugo.io/templates/internal/#open-graph
+# See https://gohugo.io/templates/internal/#twitter-cards
+title = &quot;Hugo Techdoc Theme&quot;
+images = [&quot;images/og-image.png&quot;] # Open graph images are placed in `static/images`
+
+# Theme settings section
+# Theme color
+# See color value reference https://developer.mozilla.org/en-US/docs/Web/CSS/color
+custom_font_color = &quot;&quot;
+custom_background_color = &quot;&quot;
+
+# Documentation Menu section
+# Menu style settings
+menu_style = &quot;open-menu&quot; # &quot;open-menu&quot; or &quot;slide-menu&quot; or &quot;&quot; blank is as no sidebar
+
+# Date format
+dateformat = &quot;&quot; # default &quot;2 Jan 2006&quot;
+# See the format reference https://gohugo.io/functions/format/#hugo-date-and-time-templating-reference
+
+# path name excluded from documentation menu
+menu_exclusion = [
+    &quot;archives&quot;,
+    &quot;archive&quot;,
+    &quot;blog&quot;,
+    &quot;entry&quot;,
+    &quot;post&quot;,
+    &quot;posts&quot;,
+]
+
+# Algolia site search section
+# See https://www.algolia.com/doc/
+algolia_search_enable = true
+algolia_indexName = &quot;hugo-demo-techdoc&quot;
+algolia_appId = &quot;7W4SAN4PLK&quot;
+algolia_apiKey = &quot;cbf12a63ff72d9c5dc0c10c195cf9128&quot; # Search-Only API Key</code></pre>
+<div id="description" class="section level4">
+<h4><code>description</code></h4>
+<p>The document summary</p>
+<p>default: <code>put your description</code></p>
+</div>
+<div id="github_repository" class="section level4">
+<h4><code>github_repository</code></h4>
+<p>URL of souce code repository</p>
+<p>default: <code>https://github.com/thingsym/hugo-theme-techdoc</code></p>
+</div>
+<div id="version" class="section level4">
+<h4><code>version</code></h4>
+<p>The version of souce code</p>
+<p>default: <code>0.9.7</code></p>
+</div>
+<div id="github_doc_repository" class="section level4">
+<h4><code>github_doc_repository</code></h4>
+<p>URL of documentation repository for editting</p>
+<p>default: <code>https://github.com/thingsym/hugo-theme-techdoc</code></p>
+</div>
+<div id="google_analytics_id" class="section level4">
+<h4><code>google_analytics_id</code></h4>
+<p>ID of Google Analytics</p>
+<p>default: <code>""</code></p>
+</div>
+<div id="tag_manager_container_id" class="section level4">
+<h4><code>tag_manager_container_id</code></h4>
+<p>Container ID of Google Tag Manager</p>
+<p>default: <code>""</code></p>
+</div>
+<div id="google_site_verification" class="section level4">
+<h4><code>google_site_verification</code></h4>
+<p>Content value in meta tag <code>google-site-verification</code> for Google Search Console</p>
+<pre><code>&lt;meta name=&quot;google-site-verification&quot; content=&quot;e7-viorjjfiihHIoowh8KLiowhbs&quot; /&gt;</code></pre>
+<p>default: <code>""</code></p>
+</div>
+<div id="title" class="section level4">
+<h4><code>title</code></h4>
+<p>default open graph title for open graph</p>
+<p>default: <code>"Hugo Techdoc Theme"</code></p>
+</div>
+<div id="images" class="section level4">
+<h4><code>images</code></h4>
+<p>default open graph image for open graph</p>
+<p>Open graph images are placed in <code>static/images</code>.</p>
+<p>default: <code>["images/og-image.png"]</code></p>
+</div>
+<div id="custom_font_color" class="section level4">
+<h4><code>custom_font_color</code></h4>
+<p>Header font color</p>
+<p>See color value reference <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color" class="uri">https://developer.mozilla.org/en-US/docs/Web/CSS/color</a></p>
+<p>default: <code>""</code></p>
+</div>
+<div id="custom_background_color" class="section level4">
+<h4><code>custom_background_color</code></h4>
+<p>Header background color</p>
+<p>See color value reference <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color" class="uri">https://developer.mozilla.org/en-US/docs/Web/CSS/color</a></p>
+<p>default: <code>""</code></p>
+</div>
+<div id="menu_style" class="section level4">
+<h4><code>menu_style</code></h4>
+<p>Documentation Menu style, Open Menu or Slide Menu</p>
+<p>default: <code>open-menu</code><br />
+value: <code>open-menu</code> | <code>slide-menu</code></p>
+</div>
+<div id="dateformat" class="section level4">
+<h4><code>dateformat</code></h4>
+<p>default: <code>""</code> as <code>2 Jan 2006</code></p>
+</div>
+<div id="menu_exclusion" class="section level4">
+<h4><code>menu_exclusion</code></h4>
+<p>Path name excluded from documentation menu</p>
+<p>By default, we exclude commonly used folder names in blogs.</p>
+<p>default: <code>[         "archives",         "archive",         "blog",         "entry",         "post",         "posts"     ]</code></p>
+</div>
+<div id="algolia_search_enable" class="section level4">
+<h4><code>algolia_search_enable</code></h4>
+<p>Enable Algolia search</p>
+<p>default: <code>true</code></p>
+<p>value: <code>true</code> | <code>false</code></p>
+</div>
+<div id="algolia_indexname" class="section level4">
+<h4><code>algolia_indexName</code></h4>
+<p>Algolia index name</p>
+<p>default: <code>hugo-demo-techdoc</code></p>
+</div>
+<div id="algolia_appid" class="section level4">
+<h4><code>algolia_appId</code></h4>
+<p>Application id</p>
+<p>default: <code>7W4SAN4PLK</code></p>
+</div>
+<div id="algolia_apikey" class="section level4">
+<h4><code>algolia_apiKey</code></h4>
+<p>Search-Only API Key</p>
+<p>default: <code>cbf12a63ff72d9c5dc0c10c195cf9128</code></p>
+</div>
+</div>

@@ -1,0 +1,23 @@
+---
+date: "2021-09-12T15:26:15Z"
+draft: false
+title: Late 1800s - Early 1900s
+weight: 10
+bibliography: references.bib
+---
+
+## Origins
+
+Reliability. That's a word we take for granted these days as we rely more on
+tools and infrastructure. Century-old infrastructure projects including the 
+pyramids, the Great Wall of China, and Roman coliseums were hallmarks for 
+engineering accomplishments. While these feats are significant, **they aren't
+immune to the forces of mother nature and father time.** Thus, the need for 
+maintenance and upkeep still exists [@nachlas_2017]. Nearly everyone at some 
+point in their lives, will experience some sort of failure both internally and 
+externally. That's why those experiences are used to improve among ourselves to 
+create stronger products, make better decisions, and obtain longer product life 
+cycles [@maynard_zandin_2001]. That is what ties industrial engineering, 
+operations research, and reliability engineering together.
+
+## References
