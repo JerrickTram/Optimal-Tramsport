@@ -13,4 +13,4 @@ title: Resources
 bibliography: references.bib  
 nocite: '@*'
 ---
-# Books, References, and other Material
+# Books, Modules, and References
