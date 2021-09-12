@@ -1,4 +1,4 @@
-baseURL: ise-or-docs.netlify.com
+baseURL: https://ise-or-docs.netlify.app/
 languageCode: en-us
 DefaultContentLanguage: en
 title: Industrial Engineering/Operations Research Docs
@@ -46,7 +46,7 @@ params:
   menu_style: open-menu
   tag_manager_container_id: ''
   title: TechDoc
-  version: 1.0.2
+  version: 1.0.3
 menu:
   main:
     - name: Home
