@@ -1,0 +1,74 @@
+baseURL: https://example.com
+languageCode: en-us
+DefaultContentLanguage: en
+title: Industrial Engineering/Operations Research Docs
+theme: hugo-theme-techdoc
+hasCJKLanguage: yes
+metaDataFormat: yaml
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: no
+enableMissingTranslationPlaceholders: no
+params:
+  algolia:
+    params:
+      - tags
+      - categories
+    vars:
+      - title
+      - summary
+      - content
+      - date
+      - publishdate
+      - description
+      - permalink
+      - keywords
+      - lastmod
+  algolia_apiKey: cbf12a63ff72d9c5dc0c10c195cf9128
+  algolia_appId: 7W4SAN4PLK
+  algolia_indexName: hugo-demo-techdoc
+  algolia_search_enable: yes
+  custom_background_color: ''
+  custom_font_color: ''
+  dateformat: ''
+  description: The place to learn how to improve processes and decision-making through quantitative and computing methods.
+  github_doc_repository: https://github.com/JerrickTram/ISE-OR-Stuff
+  github_repository: https://github.com/JerrickTram
+  google_analytics_id: ''
+  google_site_verification: ''
+  images: images/og-image.png
+  menu_exclusion:
+    - archives
+    - archive
+    - blog
+    - entry
+    - post
+    - posts
+  menu_style: open-menu
+  tag_manager_container_id: ''
+  title: TechDoc
+  version: 1.0.1
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: 1
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      unsafe: yes
+  tableOfContents:
+    endLevel: 6
+    ordered: no
+    startLevel: 2
+outputs:
+  home:
+    - HTML
+    - RSS
+    - Algolia
+outputFormats:
+  Algolia:
+    baseName: algolia
+    isPlainText: yes
+    mediaType: application/json
+    notAlternative: yes

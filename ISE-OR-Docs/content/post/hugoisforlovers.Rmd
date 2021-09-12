@@ -1,0 +1,16 @@
+---
+categories:
+- References
+- Books
+date: "2021-09-12"
+description: ""
+menu: main
+tags:
+- operations research
+- industrial engineering
+- mathematical programming
+title: Resources
+bibliography: references.bib  
+nocite: '@*'
+---
+# Books, References, and other Material
