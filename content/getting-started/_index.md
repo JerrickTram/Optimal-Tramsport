@@ -4,13 +4,13 @@ description: Text about this post
 draft: false
 images:
 - images/pexels-photo-196666.jpeg
-lastmod: 2021-09-12T15:26:15Z"
+lastmod: 2021-09-13T15:26:15Z"
 publishdate: "2021-09-12T15:26:15Z"
 title: History of Industrial Engineering and Operations Research
 weight: 9
 ---
 
-## [Late 1800s - Early 1900s](./late-1800s-to-1900s)
+## [1700s - Early 1900s](./1700s-to-Early-1900s)
 
 Download Hugo theme, configure, preview site ...
 

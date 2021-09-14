@@ -9,8 +9,7 @@ tags:
 - operations research
 - industrial engineering
 - mathematical programming
-title: Resources
+title: Books, Modules, and References
 bibliography: references.bib  
 nocite: '@*'
 ---
-# Books, Modules, and References

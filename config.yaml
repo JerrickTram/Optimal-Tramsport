@@ -43,10 +43,10 @@ params:
     - entry
     - post
     - posts
-  menu_style: open-menu
+  menu_style: slide-menu
   tag_manager_container_id: ''
   title: TechDoc
-  version: 1.0.4
+  version: 1.0.5
 menu:
   main:
     - name: Home

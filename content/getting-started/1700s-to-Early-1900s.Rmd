@@ -1,0 +1,56 @@
+---
+date: "2021-09-14215:26:15Z"
+draft: false
+title: 1700s - Early 1900s
+weight: 10
+bibliography: references.bib
+---
+
+## Origins
+
+Reliability. That's a word we take for granted these days as we rely more on
+tools and infrastructure. Century-old infrastructure projects including the 
+pyramids, the Great Wall of China, and Roman coliseums were hallmarks for 
+engineering accomplishments. While these feats are significant, **they aren't
+immune to the forces of mother nature and father time.** Thus, the need for 
+maintenance and upkeep still exists [@nachlas_2017]. Nearly everyone at some 
+point in their lives, will experience some sort of failure both internally and 
+externally. That's why those experiences are used to improve among ourselves to 
+create stronger products, make better decisions, and obtain longer product life 
+cycles [@maynard_zandin_2001]. That is what ties industrial engineering, 
+operations research, and reliability engineering together.
+
+## Industrial Revolution and Onwards
+
+While there isn't an exact date as of when industrial engineering started,
+most historians look at the Industrial Revolution due to how
+manufacturing practices changed and the technological innovations that 
+developed during that timeline. Notable inventions include:
+
+* Flying shuttle (Kay 1733)
+* Spinning jenny (Hargreaves 1765)
+* Steam engine (Watt 1765)
+* Water frame (Arkwright 1769)
+
+With the benefit of hindsight, one could guess which one of these inventions
+paved the way for power generation. The steam engine allowed manufacturers to
+look at other sources of power instead of relying solely on hydroelectric w
+power. As a result, production costs fell, prices fell, and areas that normally
+wouldn't have access to hydroelectric energy now have an accessible power 
+source through steam. These innovations gave birth to the idea of a production
+system due to the increased accessibility.
+
+## Interchangeability and Scientific Management
+
+Before people could buy individual parts for machinery, everything was put
+together under one person. Thanks to the efforts of Eli Whitney and Simeon 
+North, individual parts could be mass-produced to specifications for any 
+finished product [@maynard_zandin_2001]. Frederick W. Taylor on the other hand,
+wanted to find out "the best way to do a job" [@gass_assad_2005]. Under his 
+system, he focused on removing wasteful movements of each component within the
+production process. As a result, work efficiency improved tremendously, time 
+spent on tasks were reduced, and work measurement standards were developed.
+In a way, Taylor accomplished the same goal with work as Whitney did with 
+parts.
+
+## References
