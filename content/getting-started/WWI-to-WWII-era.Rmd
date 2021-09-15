@@ -1,12 +1,37 @@
 ---
 date: "2021-09-12T15:26:15Z"
 draft: false
-lastmod: "2021-09-14T15:26:15Z"
+lastmod: "2021-09-15T15:26:15Z"
 title: WWI - WWII Era
 weight: 20
+bibliography: references.bib
 ---
 
-# Military Origins of Operations Research
+## Operations Research in WWI
 
 Aside from technological inventions, industrial engineering didn't stand out as 
-much as operations research did.
+much as operations research did. During WWI, German U-Boats were an issue for 
+the British as they sunk convoy ships to disrupt supply lines. British 
+scientists came together to find the best way to model their convoy fleets
+based on ship size, speed, and deployment timing. The US didn't get involved 
+in WWI until roughly 2 years after the RMS Lusitania sinking incident. As a 
+result, US ships escorted those convoys while participating in submarine hunting. 
+The combined forces of optimized British convoys and US naval ships allowed
+British convoy fatality rates to drop from 10% to 0.5% [@theorsocietyuk_2017]. 
+
+## Operations Research in WWII
+
+After WWI, operations research gained more prominence through the development 
+of radar. A.P. Rowe's and Robert Watson-Watt's breakthrough alongside the 
+assistance of Royal Air Force officers improved the UK's air defense 
+capabilities by 20-fold [@theorsocietyuk_2017]. Patrick Blackett, a British 
+physicist, redeployed the convoy system from WWI and tested the UK's new radar
+capabilities with great success. The U.S. Air Force eventually decided to have 
+their own operations research groups for wargaming purposes. After WWII, 
+mathematician George B. Dantzig developed the linear programming formulation 
+(Leonid Vitalievich Kantorovich from the USSR although came up with it although 
+his work wasn't popular among USSR economists) [@matlab_2020]. Operations 
+research become widespread in the US private sector where over half of US 
+companies used it at some function [@holsten_1998]. 
+
+## References
