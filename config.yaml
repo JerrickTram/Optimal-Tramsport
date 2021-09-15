@@ -46,7 +46,7 @@ params:
   menu_style: slide-menu
   tag_manager_container_id: ''
   title: TechDoc
-  version: 1.0.5
+  version: 1.0.6
 menu:
   main:
     - name: Home

@@ -21,6 +21,7 @@ Some of the topics covered will include, but not limited to:
 * Work Measurement and Control Processes
 * Change Management
 * Statistical Methods
+* Facility Design
 * Forecasting and Demand Management
 * Human Factors, Economics, and Planning
 * Inventory Management

@@ -6,3 +6,7 @@ title: WWI - WWII Era
 weight: 20
 ---
 
+# Military Origins of Operations Research
+
+Aside from technological inventions, industrial engineering didn't stand out as 
+much as operations research did.
