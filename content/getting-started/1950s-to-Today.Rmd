@@ -8,9 +8,9 @@ bibliography: references.bib
 
 ## Functions of Industrial Engineering and Operations Research Professionals
 
-As the 70s and 80s approached, industrial engineering as a field became more 
-generalized with more quantitative techniques and computers being introduced, 
-there was little difference between industrial engineering and operations 
-research [@holsten_1999].
+As the 70s and 80s approached, industrial engineering began to lose its identity 
+with more quantitative techniques and computers being introduced, there was 
+little difference between industrial engineering and operations research 
+[@holsten_1999].
 
 ## References
