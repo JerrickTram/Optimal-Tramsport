@@ -1,7 +1,7 @@
 ---
 date: "2021-09-12"
 menu: main
-title: About ISE/OR Docs
+title: About ISE and OR Docs
 ---
 
 For those who aren't too familiar with industrial engineering and/or operations
