@@ -28,13 +28,13 @@ to help solve complex issues."
 
 ---
 
-Industrial engineering is more domain-focused (manufacturing in particular) on 
-**optimizing processes, ergonomics, design, material handling,** and more [@maynard_zandin_2001]. 
+Industrial engineering specializes in manufacturing and production in particular
+for process improvement [@maynard_zandin_2001]. Methodology includes lean 
+manufacturing, six sigma, and just-in-time (JIT) manufacturing. The latter may
+eventually be phased out due to COVID causing supply shocks especially in ports.
 Operations research focuses on **how to optimize** resources at hand to achieve 
-an organizational goal. You'll see the skillsets of industrial engineers involve 
-quality control, improving production flow, and time/cost reduction. While 
-operations research analysts are involved in some of those processes, they are 
-not normally the key decision makers despite helping in that 
+an organizational goal. While operations research analysts are involved in some 
+of those processes, they are not directly involved despite helping in that 
 decision-making process.
 
 ## References
