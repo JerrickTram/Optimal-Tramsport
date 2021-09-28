@@ -1,7 +1,7 @@
 ---
 date: "2017-10-17T15:26:15Z"
 draft: false
-title: Chapter 3 (hierarchized)
+title: Integer Programming
 weight: 40
 ---
 

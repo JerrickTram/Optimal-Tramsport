@@ -14,7 +14,7 @@ title: Home
 
 Some of the topics covered will include, but not limited to:
 
-* Functions of Industrial Engineering and Operations Research Professionals
+* History of Industrial Engineering and Operations Research 
 * Production/Manufacturing Planning
 * Reliability Engineering
 * Project Management

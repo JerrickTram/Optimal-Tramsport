@@ -1,0 +1,129 @@
+---
+date: "2021-09-15"
+lastmod: "2021-09-25"
+draft: false
+title: Vector Spaces
+weight: 20
+bibliography: references.bib
+---
+
+## Vectors and Matrices
+### Matrix 1
+
+```{python}
+import numpy as np
+
+M = np.array([
+  [1, 2, 3],
+  [5, 4, 6],
+  [7, 9, 8]
+])
+
+
+print(M)
+```
+
+Vectors are 1-dimensional arrays with only 1 row and/or 1 column. For instance,
+a 1 x 4 array would have 1 row and 4 columns. A 4 x 1 array would have 4 rows and 
+1 column. Typically, $m \times n$ is the standard notation to represent arrays/matrices.
+You can probably make an educated guess that matrices aren't restricted to only
+1 unit/variable per dimension. In the case of [Matrix 1], we have a $3 \times 3$
+matrix with 3 rows and 3 columns which is a 2-dimensional array.
+
+### Matrix 2
+
+\begin{align}
+  M = 
+  \begin{bmatrix}
+    a_{11} & a_{12} & \dots & a_{1n} \\
+    a_{21} & a_{22} & \dots & a_{2n} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    a_{m1} & a_{m2} & \dots & a_{mn}
+  \end{bmatrix}
+\end{align}
+
+> The numbers in the *i*th row and *j*th column of matrix *M* are known as the 
+***ij***th element of M notated as $a_{ij}$ [@winston_2004]. Referring back to [Matrix 1], 
+$a_{21}$ would be 2, $a_{33}$ would be 8, and so on.
+
+```{python}
+# The value at a12 of matrix 1
+print(M[0][1])
+```
+
+The above statement was run in `Python` to find the $a_{12}$th element of [Matrix 1]. 
+Note that Python uses 0-based numbering so when referring to the entire 1st row 
+of a matrix, **you would start at 0 instead of 1** i.e. `matrixname[0]`.
+
+## Matrix Arithmetic
+
+If you recall the PEMDAS mnemonic device from K-12, the same logic applies when 
+using matrix operations. Any matrix $M$ and number $c$ (sometimes called scalars),
+the matrix $cA$ exists by multiplying $c$ by each element of $A$. In other words,
+the distribution property at play. No different from multiplying a matrix by
+another matrix although they apply to corresponding elements i.e. $a_{11} \times b_{11}$.
+
+```{python}
+3*M
+```
+
+> Another way to represent the result above is: 
+\begin{align}
+  \begin{bmatrix}
+    3 & 3 & 3 \\
+    3 & 3 & 3 \\
+    3 & 3 & 3
+  \end{bmatrix}
+  \times 
+  \begin{bmatrix}
+    1 & 2 & 3 \\
+    5 & 4 & 6 \\
+    7 & 9 & 8
+  \end{bmatrix}
+\end{align}
+
+## Practical Applications
+
+This example is derived from [@maynard_zandin_2001]. You're an industrial 
+engineer in charge of improving operations for an aerospace firm. However,
+you also need to know what productivity measures/results to look for before
+starting to look into processes. After all, the main goal of any for-profit 
+organization is to produce high-quality products at reasonable prices and 
+delivery times. Because COVID has disrupted supply chains worldwide, you're 
+prioritizing ways to improve cycle times. The 1st matrix involves 
+the production time (days) of product $a_{ij}$ while the 2nd matrix 
+involves the total orders of product $a_{ij}$ (per 1000 orders). We want to 
+find the cycle times through **dividing production time by order volume** of product $a_{ij}$. 
+
+```{python, echo = F}
+np.random.seed(1234)
+
+time = np.array([
+  list(np.random.randint(10, 100, 3)),
+  list(np.random.randint(10, 100, 3)),
+  list(np.random.randint(10, 100, 3))
+])
+
+orders = np.array([
+  list(np.random.randint(1, 10, 3)),
+  list(np.random.randint(1, 10, 3)),
+  list(np.random.randint(1, 10, 3))
+])
+
+cycletime = np.divide(time, orders)
+
+print(time)
+print(orders)
+print(cycletime)
+```
+
+Its best to talk with the production team for their assessment of the production
+time of product $a_{ij}$. That way, you have a better way to measure cycle time
+vs throwing a random figure out there. Depending on the product, the cycle times
+of products $a_{13}, a_{23}$ and $a_{32}$ **might** (I'm emphasizing this for 
+reason) be an issue. The time it takes to manufacture microchips vs the F-35
+Lighting II (combat aircraft) differ massively. There are other productivity
+measurements such as labor costs, dollars per square foot, etc. from
+[@maynard_zandin_2001] if you have further interest in productivity metrics.
+
+## References

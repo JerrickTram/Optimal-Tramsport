@@ -1,0 +1,30 @@
+---
+date: "2021-09-15T15:26:15Z"
+lastmod: "2021-09-24T15:26:15Z"
+description: this is a sample document.
+draft: false
+title: Linear Algebra 
+weight: 10
+bibliography: references.bib
+---
+
+This section will be referring to a classic operations research textbook 
+[@winston_2004] and a linear algebra book with `R` and `Python` code supplements
+[@Yoshida2021]. Linear algebra is essential to many optimization techniques in 
+addition to statistics in general (especially predictive modeling). In many (if 
+not all industries), data will be formatted in vectors and/or matrices. For those 
+who have worked with spreadsheets before, you already have seen them in those 
+forms as tables. Typically, the numbers in those tables will involve total 
+constraints, metrics of a variable (coefficients), etc. This is designed to be a 
+**basic introduction** to linear algebra towards developing working knowledge. 
+These topics include:
+
+* [Vectors Spaces](./1)
+* [Systems of Linear Equations](./2)
+* [Gaussian Elimination](./3)
+* [Determinants](./4)
+* [Linear Transformations](./5)
+* [Diagonalization, Eigenvalues, and Eigenvectors](./6)
+
+## References
+

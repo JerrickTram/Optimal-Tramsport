@@ -1,12 +1,13 @@
 ---
-date: "2017-10-17T15:26:15Z"
+date: "2021-09-15"
+lastmod: "2021-09-24"
 draft: false
-title: Chapter 4 (unlimited levels)
+title: Nonlinear Programming
 weight: 50
 ---
 
 {{% panel status="primary" title="Note" icon="far fa-lightbulb" %}}
-The document hierarchy is unlimite.
+The document hierarchy is unlimited.
 It also means that the menu levels is unlimited levels.
 
 The menu levels has up to 5 levels of indentation. After that there is no indentation.

@@ -1,0 +1,30 @@
+---
+date: "2021-09-15"
+lastmod: "2021-09-27"
+draft: false
+title: Systems of Linear Equations
+weight: 30
+bibliography: references.bib
+---
+
+## Designing a System of Linear Equations
+
+How exactly is linear algebra a key component in many optimization and 
+statistics problems? The answer is solving the title of this section. 
+In most optimization problems, we want to find the **best** way to allocate
+resources to accomplish a goal. Not the largest/smallest nor longest/shortest
+way, but **optimal.** Deriving from an example in [@Yoshida2021], an industrial 
+gas company wants to transport gas canisters from their production sites (A, B) 
+to their distributors (C, D). Distributor C have a demand of 500 canisters/week 
+and 400 canisters/week for Distributor D. In addition, production sites A and B
+can supply 600 and 500 canisters/week respectively. Formulating the system of 
+linear equations:
+
+\begin{align}
+x_{AC} + x_{AD} = 600 \\
+x_{BC} + x_{BD} = 500 \\
+x_{AC} + x_{BC} = 500 \\
+x_{AD} + x_{BD} = 400
+\end{align}
+
+## References

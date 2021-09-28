@@ -1,0 +1,129 @@
+---
+date: "2021-09-15"
+lastmod: "2021-09-25"
+draft: false
+title: Vector Spaces
+weight: 20
+bibliography: references.bib
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="vectors-and-matrices" class="section level2">
+<h2>Vectors and Matrices</h2>
+<div id="matrix-1" class="section level3">
+<h3>Matrix 1</h3>
+<pre class="python"><code>import numpy as np
+
+M = np.array([
+  [1, 2, 3],
+  [5, 4, 6],
+  [7, 9, 8]
+])
+
+
+print(M)</code></pre>
+<pre><code>## [[1 2 3]
+##  [5 4 6]
+##  [7 9 8]]</code></pre>
+<p>Vectors are 1-dimensional arrays with only 1 row and/or 1 column. For instance,
+a 1 x 4 array would have 1 row and 4 columns. A 4 x 1 array would have 4 rows and
+1 column. Typically, <span class="math inline">\(m \times n\)</span> is the standard notation to represent arrays/matrices.
+You can probably make an educated guess that matrices aren’t restricted to only
+1 unit/variable per dimension. In the case of <a href="#matrix-1">Matrix 1</a>, we have a <span class="math inline">\(3 \times 3\)</span>
+matrix with 3 rows and 3 columns which is a 2-dimensional array.</p>
+</div>
+<div id="matrix-2" class="section level3">
+<h3>Matrix 2</h3>
+<p><span class="math display">\[\begin{align}
+  M = 
+  \begin{bmatrix}
+    a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} \\
+    a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} \\
+    \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+    a_{m1} &amp; a_{m2} &amp; \dots &amp; a_{mn}
+  \end{bmatrix}
+\end{align}\]</span></p>
+<blockquote>
+<p>The numbers in the <em>i</em>th row and <em>j</em>th column of matrix <em>M</em> are known as the
+<strong><em>ij</em></strong>th element of M notated as <span class="math inline">\(a_{ij}\)</span> <span class="citation">(<a href="#ref-winston_2004" role="doc-biblioref">Winston 2004</a>)</span>. Referring back to <a href="#matrix-1">Matrix 1</a>,
+<span class="math inline">\(a_{21}\)</span> would be 2, <span class="math inline">\(a_{33}\)</span> would be 8, and so on.</p>
+</blockquote>
+<pre class="python"><code># The value at a12 of matrix 1
+print(M[0][1])</code></pre>
+<pre><code>## 2</code></pre>
+<p>The above statement was run in <code>Python</code> to find the <span class="math inline">\(a_{12}\)</span>th element of <a href="#matrix-1">Matrix 1</a>.
+Note that Python uses 0-based numbering so when referring to the entire 1st row
+of a matrix, <strong>you would start at 0 instead of 1</strong> i.e. <code>matrixname[0]</code>.</p>
+</div>
+</div>
+<div id="matrix-arithmetic" class="section level2">
+<h2>Matrix Arithmetic</h2>
+<p>If you recall the PEMDAS mnemonic device from K-12, the same logic applies when
+using matrix operations. Any matrix <span class="math inline">\(M\)</span> and number <span class="math inline">\(c\)</span> (sometimes called scalars),
+the matrix <span class="math inline">\(cA\)</span> exists by multiplying <span class="math inline">\(c\)</span> by each element of <span class="math inline">\(A\)</span>. In other words,
+the distribution property at play. No different from multiplying a matrix by
+another matrix although they apply to corresponding elements i.e. <span class="math inline">\(a_{11} \times b_{11}\)</span>.</p>
+<pre class="python"><code>3*M</code></pre>
+<pre><code>## array([[ 3,  6,  9],
+##        [15, 12, 18],
+##        [21, 27, 24]])</code></pre>
+<blockquote>
+<p>Another way to represent the result above is:
+<span class="math display">\[\begin{align}
+\begin{bmatrix}
+3 &amp; 3 &amp; 3 \\
+3 &amp; 3 &amp; 3 \\
+3 &amp; 3 &amp; 3
+\end{bmatrix}
+\times 
+\begin{bmatrix}
+1 &amp; 2 &amp; 3 \\
+5 &amp; 4 &amp; 6 \\
+7 &amp; 9 &amp; 8
+\end{bmatrix}
+\end{align}\]</span></p>
+</blockquote>
+</div>
+<div id="practical-applications" class="section level2">
+<h2>Practical Applications</h2>
+<p>This example is derived from <span class="citation">(<a href="#ref-maynard_zandin_2001" role="doc-biblioref">Maynard and Zandin 2001</a>)</span>. You’re an industrial
+engineer in charge of improving operations for an aerospace firm. However,
+you also need to know what productivity measures/results to look for before
+starting to look into processes. After all, the main goal of any for-profit
+organization is to produce high-quality products at reasonable prices and
+delivery times. Because COVID has disrupted supply chains worldwide, you’re
+prioritizing ways to improve cycle times. The 1st matrix involves
+the production time (days) of product <span class="math inline">\(a_{ij}\)</span> while the 2nd matrix
+involves the total orders of product <span class="math inline">\(a_{ij}\)</span> (per 1000 orders). We want to
+find the cycle times through <strong>dividing production time by order volume</strong> of product <span class="math inline">\(a_{ij}\)</span>.</p>
+<pre><code>## [[57 93 48]
+##  [63 86 34]
+##  [25 59 33]]</code></pre>
+<pre><code>## [[7 9 1]
+##  [6 1 7]
+##  [3 1 6]]</code></pre>
+<pre><code>## [[ 8.14285714 10.33333333 48.        ]
+##  [10.5        86.          4.85714286]
+##  [ 8.33333333 59.          5.5       ]]</code></pre>
+<p>Its best to talk with the production team for their assessment of the production
+time of product <span class="math inline">\(a_{ij}\)</span>. That way, you have a better way to measure cycle time
+vs throwing a random figure out there. Depending on the product, the cycle times
+of products <span class="math inline">\(a_{13}, a_{23}\)</span> and <span class="math inline">\(a_{32}\)</span> <strong>might</strong> (I’m emphasizing this for
+reason) be an issue. The time it takes to manufacture microchips vs the F-35
+Lighting II (combat aircraft) differ massively. There are other productivity
+measurements such as labor costs, dollars per square foot, etc. from
+<span class="citation">(<a href="#ref-maynard_zandin_2001" role="doc-biblioref">Maynard and Zandin 2001</a>)</span> if you have further interest in productivity metrics.</p>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-maynard_zandin_2001" class="csl-entry">
+Maynard, Harold B., and Kjell B. Zandin. 2001. <em>Maynard’s Industrial Engineering Handbook</em>. McGraw-Hill.
+</div>
+<div id="ref-winston_2004" class="csl-entry">
+Winston, Wayne L. 2004. <em>Operations Research: Applications and Algorithms</em>. 4th ed. Duxbury Press.
+</div>
+</div>
+</div>
