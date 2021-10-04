@@ -8,6 +8,8 @@ publishdate: "2021-09-12T15:26:15Z"
 title: Home
 ---
 
+> **Disclaimer:** This site is currently under development.
+
 # Industrial Engineering and Operations Research
 
 ## The Techdoc is a Hugo Theme for technical documentation
