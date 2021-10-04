@@ -47,6 +47,9 @@ of the unit values from your commodities. <span class="math inline">\(x_1, x_2, 
 fulfill our linear equations. On the right-hand side (RHS), we have our
 <strong>constraints</strong> which are our limitations or restrictions.</p>
 </blockquote>
+</div>
+<div id="solving-a-system-of-linear-equations" class="section level2">
+<h2>Solving a System of Linear Equations</h2>
 <p>Normally, this problem set would be solved through <a href="https://www.math.usm.edu/lambers/mat610/sum10/lecture4.pdf">gaussian elimination and back substitution</a>.
 Basically, you’re elimininating unknown variables by manipulating equations. For
 example, if I wanted to get rid of <span class="math inline">\(x_1\)</span> in the 2nd equation, replace the 2nd
@@ -74,7 +77,7 @@ itself. You do this repeatedly until an equation has a single unknown.</p>
 <span class="math inline">\(x_2\)</span> resulting as 100. Plug both values into their respective values in equation 1
 to get 450 for <span class="math inline">\(x_1\)</span>. As a result, <span class="math inline">\((x_1, x_2, x_3) = (450, 100, 200)\)</span>. However,
 as these systems of linear equations begin to scale in size, you could imagine
-that it isn’t practical to solve them by hand. That’s where Python kicks in.</p>
+that it isn’t practical to solve them by hand. That’s where Python comes in.</p>
 <pre class="python"><code>import numpy as np
 
 A = np.array([[1, 2, 3],
@@ -86,10 +89,26 @@ b = np.array([1250, 1800, 300])
 # Note: linalg.solve only accepts square matrices in the 1st parameter
 np.linalg.solve(A, b)</code></pre>
 <pre><code>## array([450., 100., 200.])</code></pre>
+<p>The limitation for the 1st parameter to be a square matrix is … quite limiting.
+There are problems where you could have 20 constraints and 10 decision variables.
+That’s where <code>np.linalg.lstsq()</code> comes in. Credits to <span class="citation">(<a href="#ref-halvorsen_2020" role="doc-biblioref">Halvorsen 2020</a>)</span> for the
+workaround.</p>
+<pre class="python"><code># Removing the 3rd equation to demonstrate finding solution in rectangular matrix
+C = np.array([[1, 2, 3],
+              [2, 1, 4]])
+              
+d = np.array([1250, 1800])
+
+# linalg.lstsq for rectangular matrices
+np.linalg.lstsq(C, d, rcond = None)[0]</code></pre>
+<pre><code>## array([206.57894737,   2.63157895, 346.05263158])</code></pre>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-halvorsen_2020" class="csl-entry">
+Halvorsen, Hans-Peter. 2020. <em>Python for Science and Engineering</em>. Halvorsen.
+</div>
 <div id="ref-Yoshida2021" class="csl-entry">
 Yoshida, Ruriko. 2021. <em>Linear Algebra and Its Applications with <span>R</span></em>. Taylor &amp; Francis Group.
 </div>
