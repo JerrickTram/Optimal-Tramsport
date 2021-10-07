@@ -8,26 +8,18 @@ publishdate: "2021-09-12T15:26:15Z"
 title: Home
 ---
 
-> **Disclaimer:** This site is currently under development.
-
-# Industrial Engineering and Operations Research
+# Operations Research
 
 ## The Techdoc is a Hugo Theme for technical documentation
 
 Some of the topics covered will include, but not limited to:
 
-* History of Industrial Engineering and Operations Research 
-* Production/Manufacturing Planning
-* Reliability Engineering
-* Project Management
-* Work Measurement and Control Processes
-* Change Management
-* Statistical Methods
-* Facility Design
-* Forecasting and Demand Management
-* Human Factors, Economics, and Planning
-* Inventory Management
-* Linear Algebra and Linear Programming
+* History of Operations Research 
+* Linear Algebra
+* Linear Programming
 * Integer Programming
 * Nonlinear Programming
 * Dynamic Programming, Queuing Theory, and Simulations
+* Global Optimization
+* Stochastic Programming
+* Statistics

@@ -22,7 +22,7 @@ once due to constraints:
 weight capacity is 1,250 tons. 
 * Commodities $x_1, x_2,$ and $x_3$ require 2, 1, and 4 freight cars each with
 1,800 freight cars available.
-* Commodities $x_2$ and $x_3$ must add to 300 units respectively.
+* Commodities $x_2$ and $x_3$ must total 300 units.
 
 \begin{align}
   
@@ -46,11 +46,13 @@ fulfill our linear equations. On the right-hand side (RHS), we have our
 
 ## Solving a System of Linear Equations
 
-Normally, this problem set would be solved through [gaussian elimination and back substitution](https://www.math.usm.edu/lambers/mat610/sum10/lecture4.pdf). 
-Basically, you're elimininating unknown variables by manipulating equations. For
-example, if I wanted to get rid of $x_1$ in the 2nd equation, replace the 2nd 
-equation by the sum of multiplying the 1st equation by -2 and the 2nd equation
-itself. You do this repeatedly until an equation has a single unknown.
+Normally, this problem set would be solved through [gaussian elimination and back 
+substitution](https://www.math.usm.edu/lambers/mat610/sum10/lecture4.pdf). 
+Basically, you're eliminating unknown variables by manipulating equations with
+elementary row reductions. For example, if I wanted to get rid of $x_1$ in the 
+2nd equation, replace the 2nd equation by the sum of multiplying the 1st equation 
+by -2 and the 2nd equation itself. You do this repeatedly until an equation has a 
+single unknown. 
 
 \begin{align}
   \left[\begin{array}{@{}ccc|c@{}}
@@ -71,11 +73,11 @@ itself. You do this repeatedly until an equation has a single unknown.
 \end{align}
 
 $x_3$ results in 300 when dividing the constraint by the coefficient of commodity
-$x_3$. For the back subtitution, plug in 300 into $x_3$ in equation 2 to solve for 
-$x_2$ resulting as 100. Plug both values into their respective values in equation 1
-to get 450 for $x_1$. As a result, $(x_1, x_2, x_3) = (450, 100, 200)$. However,
-as these systems of linear equations begin to scale in size, you could imagine 
-that it isn't practical to solve them by hand. That's where Python comes in.
+$x_3$. For the back substitution, plug in 300 into $x_3$ in equation 2 to solve for 
+$x_2$ resulting in 100. Plug both values into their respective values in equation 1
+to get 450 for $x_1$. As a result, $(x_1, x_2, x_3) = (450, 100, 200)$. As our 
+systems of linear equations begin to scale in size, it isn't practical to solve 
+them by hand. Instead, we will use Python's scientific computing capabilities. 
 
 ```{python}
 import numpy as np
@@ -83,27 +85,36 @@ import numpy as np
 A = np.array([[1, 2, 3],
               [2, 1, 4],
               [0, 1, 1]])
-              
 b = np.array([1250, 1800, 300])
 
-# Note: linalg.solve only accepts square matrices in the 1st parameter
-np.linalg.solve(A, b)
+def eroLEQ(matrix, constraints):
+  A = matrix
+  b = constraints
+  
+  if A.shape[0] == A.shape[1]:
+    # Note: linalg.solve only accepts square matrices in the 1st parameter
+    return np.linalg.solve(A, b)
+  else:
+    # lstsq for rectangular matrices
+    return np.linalg.lstsq(A, b, rcond = None)[0]
+
+eroLEQ(A, b)
 ```
 
-The limitation for the 1st parameter to be a square matrix is ... quite limiting.
-There are problems where you could have 20 constraints and 10 decision variables.
-That's where `np.linalg.lstsq()` comes in. Credits to [@halvorsen_2020] for the
-workaround. 
+## Working Examples
+### Traffic Flow
 
-```{python}
-# Removing the 3rd equation to demonstrate finding solution in rectangular matrix
-C = np.array([[1, 2, 3],
-              [2, 1, 4]])
-              
-d = np.array([1250, 1800])
+Even freight trains aren't immune to waiting for traffic despite being rail-bound. 
+From [@corman_trivella_keyvan-ekbatani_2021], this paper goes into modeling train
+behavior in a way similar to driving cars. If you're in charge of designing 
+railways, knowing how to build railroad networks around the volume of trains is 
+certainly a priority. In the image below, we have a network (admittedly poorly 
+designed) where we have north-south and west-east traffic.
 
-# linalg.lstsq for rectangular matrices
-np.linalg.lstsq(C, d, rcond = None)[0]
-```
+<center>
+
+![](trains.png)
+
+<center>
 
 ## References

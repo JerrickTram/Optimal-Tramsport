@@ -1,15 +1,12 @@
 ---
 date: "2021-09-12"
+lastmod: "2021-10-06"
 menu: main
-title: About ISE and OR Docs
+title: About TramOptimal
 ---
 
-For those who aren't too familiar with industrial engineering and/or operations
-research. Industrial engineering is focused on improving the effectiveness,
-efficiency, and safety of organizational processes and systems through 
-technical methodology. While operations research also involves optimization,
-the quantitative methodology is applied to supporting better decision-making. 
-Because both fields complement each other quite well, the theoretical and 
-practical knowledge are applicable to just about everything.
-
-This site is currently under development by Jerrick Tram.
+For those who aren't too familiar operations research (OR), OR involves applying
+quantitative methodology whether it'd be statistics or optimization to support
+better decision making. This site serves as a life-long project that will 
+continuously receive updates in the field of OR. Currently under development by
+Jerrick Tram.
