@@ -20,6 +20,7 @@ Some of the topics covered will include, but not limited to:
 * Integer Programming
 * Nonlinear Programming
 * Dynamic Programming, Queuing Theory, and Simulations
+* Combinatorial Optimization
 * Global Optimization
 * Stochastic Programming
 * Statistics

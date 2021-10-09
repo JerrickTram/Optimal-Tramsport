@@ -1,7 +1,7 @@
 ---
-date: "2021-09-12T15:26:15Z"
+date: "2021-09-12"
 draft: false
-lastmod: "2021-09-15T15:26:15Z"
+lastmod: "2021-10-08"
 title: WWI - WWII Era
 weight: 20
 bibliography: references.bib
@@ -9,30 +9,62 @@ bibliography: references.bib
 
 ## Operations Research in WWI
 
-Aside from technological inventions, industrial engineering didn't stand out as 
-much as operations research did. During WWI, German U-Boats were an issue for 
-the British as they sunk convoy ships to disrupt supply lines. British 
-scientists came together to find the best way to model their convoy fleets
-based on ship size, speed, and deployment timing. The US didn't get involved 
-in WWI until roughly 2 years after the RMS Lusitania sinking incident. As a 
-result, US ships escorted those convoys while participating in submarine hunting. 
-The combined forces of optimized British convoys and US naval ships allowed
-British convoy fatality rates to drop from 10% to 0.5% [@theorsocietyuk_2017]. 
+<center>
+  <figure>
+    <img src="https://cdn.shortpixel.ai/spai/w_1016+q_lossy+ret_img+to_webp/https://www.statistics.com/wp-content/uploads/2020/06/convoy.jpg" alt="uboats" width="50%"/>
+    <figcaption>Image Source: Statistics.com</figcaption>
+  </figure>
+</center>
+
+During WWI, German U-Boats were an issue for the British as they sunk convoy ships 
+to disrupt supply lines [@history_editors_2009]. Unrestricted submarine warfare 
+took its toll sinking thousands of British vessels. The British Royal Navy have
+considered implementing the convoy system into action but hesitated due to the potential 
+costs as 1) ships have to travel slowly to maintain the convoy alignment and
+2) battleships. However, British scientists came together to find the best way to 
+model their convoy fleets based on ship size, speed, and deployment timing. In addition, 
+the US got involved in WWI roughly 2 years after the RMS Lusitania sinking incident
+from German U-Boats. As a result, the US provided destroyers to escort those convoys while 
+participating in submarine hunting. The combined forces of optimized British 
+convoys and US naval ships allowed British convoy fatality rates to drop from 10% 
+to 0.5%. 
 
 ## Operations Research in WWII
 
+<center>
+  <figure>
+    <img src="https://imgix.gizmodo.com.au/content/uploads/sites/2/2013/08/27/18y8dpttsnlntjpg.jpg?auto=format&fit=fill&q=65&w=832" alt="radar" width="50%"/>
+    <figcaption>Image Source: Gizmodo</figcaption>
+  </figure>
+</center>
+
 After WWI, operations research gained more prominence through the development 
-of radar. A.P. Rowe's and Robert Watson-Watt's breakthrough alongside the 
-assistance of Royal Air Force officers improved the UK's air defense 
-capabilities by 20-fold [@theorsocietyuk_2017]. Patrick Blackett, a British 
-physicist, redeployed the convoy system from WWI and tested the UK's new radar
-capabilities with great success. The U.S. Air Force eventually decided to have 
-their own operations research groups for wargaming purposes. After WWII, 
-mathematician George B. Dantzig developed the linear programming formulation 
-for the Air Force to optimize planning costs (Leonid Vitalievich Kantorovich 
-from the USSR came up with it earlier although his work wasn't popular among 
-USSR economists) [@matlab_2020]. Operations research become widespread in the US 
-private sector where over half of US companies used it at some function 
-[@holsten_1998]. 
+of radar. Originally, the British were looking to construct a death ray to counteract
+German aircraft (which was deemed impossible). However, when they discovered that
+those same aircraft was disturbing communication waves, a hypothesis developed of
+radio waves potentially detecting aircraft. A.P. Rowe's and Robert Watson-Watt's 
+breakthrough alongside the assistance of Royal Air Force officers improved the 
+UK's air defense capabilities by 20-fold. Patrick Blackett, a British physicist, 
+redeployed the convoy system from WWI and tested the UK's new radar capabilities
+with great success. The U.S. Air Force eventually decided to have their own 
+operations research groups for wargaming purposes. After WWII, mathematician George 
+B. Dantzig developed the linear programming formulation for the Air Force to 
+optimize planning costs (Leonid Vitalievich Kantorovich from the USSR had the 
+concept earlier although his work wasn't popular among USSR economists).
+
+## Operations Research Post WWII to Today
+
+Operations research has become widespread in the US private sector where over 
+half of US companies have applied it to some capacity. Using mathematical models
+to find the best solution out of many is a useful skill in any industry. The 
+branding has changed over the years with alias such as:
+
+* Decision science
+* Management science
+* Analytics
+* Optimization
+
+Nonetheless, the applications that exist today are endless thanks to the 
+advancements in computing power and technology in general.
 
 ## References

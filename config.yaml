@@ -1,7 +1,7 @@
 baseURL: https://ise-or-docs.netlify.app/
 languageCode: en-us
 DefaultContentLanguage: en
-title: TramOptimal
+title: OR Docs
 theme: hugo-theme-techdoc
 hasCJKLanguage: yes
 metaDataFormat: yaml
@@ -27,15 +27,15 @@ params:
   algolia_appId: 7W4SAN4PLK
   algolia_indexName: hugo-demo-techdoc
   algolia_search_enable: yes
-  custom_background_color: ''
+  custom_background_color: 'black'
   custom_font_color: ''
   dateformat: ''
-  description: The place to learn about operations research with a focus on freight transport.
+  description: The place to learn about operations research with a focus on transportation. Currently under development by Jerrick Tram.
   github_doc_repository: https://github.com/JerrickTram/ISE-OR-Docs
   github_repository: https://github.com/JerrickTram
   google_analytics_id: ''
   google_site_verification: ''
-  images: images/og-image.png
+  images: static/images/og-image.png
   menu_exclusion:
     - archives
     - archive

@@ -81,16 +81,23 @@ to get 450 for <span class="math inline">\(x_1\)</span>. As a result, <span clas
 systems of linear equations begin to scale in size, it isn’t practical to solve
 them by hand. Instead, we will use Python’s scientific computing capabilities.</p>
 <pre class="python"><code>import numpy as np
+import pandas as pd
 
-A = np.array([[1, 2, 3],
-              [2, 1, 4],
-              [0, 1, 1]])
+data = pd.read_csv(&#39;sample.csv&#39;)
+
+A = np.array([
+  list(data[&#39;Weight&#39;]),
+  list(data[&#39;Cars&#39;]),
+  list(data[&#39;Mixture&#39;])
+])
+
 b = np.array([1250, 1800, 300])
 
 def eroLEQ(matrix, constraints):
   A = matrix
   b = constraints
   
+  # Check if m == n in a matrix
   if A.shape[0] == A.shape[1]:
     # Note: linalg.solve only accepts square matrices in the 1st parameter
     return np.linalg.solve(A, b)
@@ -101,27 +108,9 @@ def eroLEQ(matrix, constraints):
 eroLEQ(A, b)</code></pre>
 <pre><code>## array([450., 100., 200.])</code></pre>
 </div>
-<div id="working-examples" class="section level2">
-<h2>Working Examples</h2>
-<div id="traffic-flow" class="section level3">
-<h3>Traffic Flow</h3>
-<p>Even freight trains aren’t immune to waiting for traffic despite being rail-bound.
-From <span class="citation">(<a href="#ref-corman_trivella_keyvan-ekbatani_2021" role="doc-biblioref">Corman, Trivella, and Keyvan-Ekbatani 2021</a>)</span>, this paper goes into modeling train
-behavior in a way similar to driving cars. If you’re in charge of designing
-railways, knowing how to build railroad networks around the volume of trains is
-certainly a priority. In the image below, we have a network (admittedly poorly
-designed) where we have north-south and west-east traffic.</p>
-<center>
-<p><img src="trains.png" /></p>
-<center>
-</div>
-</div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-corman_trivella_keyvan-ekbatani_2021" class="csl-entry">
-Corman, Francesco, Alessio Trivella, and Mehdi Keyvan-Ekbatani. 2021. <span>“Stochastic Process in Railway Traffic Flow: Models, Methods and Implications.”</span> <em>Transportation Research Part C: Emerging Technologies</em> 128 (July): 103167. <a href="https://doi.org/10.1016/j.trc.2021.103167">https://doi.org/10.1016/j.trc.2021.103167</a>.
-</div>
 <div id="ref-Yoshida2021" class="csl-entry">
 Yoshida, Ruriko. 2021. <em>Linear Algebra and Its Applications with <span>R</span></em>. Taylor &amp; Francis Group.
 </div>
