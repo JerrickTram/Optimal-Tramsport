@@ -2,7 +2,7 @@
 date: "2021-09-12"
 lastmod: "2021-10-06"
 menu: main
-title: About Operations Research Applications in Freight Transport and Logistics
+title: About OR Applications in Freight Transport and Logistics
 ---
 
 For those who aren't too familiar operations research (OR), OR involves applying

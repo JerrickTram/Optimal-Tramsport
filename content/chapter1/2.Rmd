@@ -7,105 +7,31 @@ weight: 30
 bibliography: references.bib
 ---
 
-## Designing a System of Linear Equations
 
-How exactly is linear algebra a key component in many optimization and 
-statistics problems? The answer is solving the title of this section. 
-In most optimization problems, we want to find the **best** way to allocate
-resources to accomplish a goal. Not the largest/smallest nor longest/shortest
-way, but **optimal.** Deriving from an example in [@Yoshida2021], a freight rail
-company wants to transport commodities $(x_1, x_2, x_3)$ from one place to 
-another. However, they can't transport the entire inventory of each commodity at 
-once due to constraints:
+<center>
 
-* Commodities $x_1, x_2,$ and $x_3$ weigh 1, 2, and 3 tons respectively as the 
-weight capacity is 1,250 tons. 
-* Commodities $x_1, x_2,$ and $x_3$ require 2, 1, and 4 freight cars each with
-1,800 freight cars available.
-* Commodities $x_2$ and $x_3$ must total 300 units.
+<figure>
+  <img src="https://s3-us-west-2.amazonaws.com/courses-images-archive-read-only/wp-content/uploads/sites/924/2015/11/25201151/CNX_Precalc_Figure_02_03_006abc2.jpg" alt="ind" style="width:100%">
+  <figcaption>Source: Lumen Learning - College Algebra</figcaption>
+</figure>
 
-\begin{align}
-  
-  \left[\begin{array}{@{}ccc|c@{}}
-    1 & 2 & 3 & 1250 \\
-    2 & 1 & 4 & 1800 \\
-    0 & 1 & 1 & 300
-  \end{array}\right] \leftrightarrow
-  \left[\begin{array}{@{}ccc|c@{}}
-    x_1 & 2x_3 & 3x_3 & 1250 \\
-    2x_1 & x_2 & 4x_3 & 1800 \\
-    & x_2 & x_3 & 300
-  \end{array}\right]
-\end{align}
+</center>
 
-> On the left-hand side (LHS), you have your coefficient matrix which are made up
-of the unit values from your commodities. $x_1, x_2, x_3$ are referred to as 
-**decision variables** since we're trying to figure out the quantity needed to 
-fulfill our linear equations. On the right-hand side (RHS), we have our 
-**constraints** which are our limitations or restrictions.
+If you've ever heard of redundancy, you're probably heard about it in two 
+different lights:
 
-## Solving a System of Linear Equations
+* In a [just in case (JIC)](https://www.investopedia.com/terms/j/jic.asp) 
+situation. For those in the supply chain industry, that inventory management 
+strategy might be preferred after what's going on with these port backlogs.
+* In a [just in time (JIT)](https://www.investopedia.com/terms/j/jit.asp) situation, 
+that inventory management strategy prioritizes removing unnecessary waste and 
+increasing efficiency.
 
-Normally, this problem set would be solved through [gaussian elimination and back 
-substitution](https://www.math.usm.edu/lambers/mat610/sum10/lecture4.pdf). 
-Basically, you're eliminating unknown variables by manipulating equations with
-elementary row reductions. For example, if I wanted to get rid of $x_1$ in the 
-2nd equation, replace the 2nd equation by the sum of multiplying the 1st equation 
-by -2 and the 2nd equation itself. You do this repeatedly until an equation has a 
-single unknown. 
+In the case of linear independence, we're referring to the 2nd option. We want to
+understand all vectors from a set in all real numbers such that the vector 
+equation has a possible solution. In most cases, that solution would normally be
+the key to solving a system of linear equations.
 
 \begin{align}
-  \left[\begin{array}{@{}ccc|c@{}}
-    -2 & -4 & -6 & -2500 \\
-    2 & 1 & 4 & 1800 \\ \hline
-    0 & -3 & -2 & -700 
-  \end{array}\right] \rightarrow
-    \begin{bmatrix}
-    1 & 2 & 3 & 150 \\
-    0 & -3 & -2 & -700 \\
-    0 & 1 & 1 & 300
-  \end{bmatrix} \rightarrow
-  \begin{bmatrix}
-    1 & 2 & 3 & 150 \\
-    0 & -3 & -2 & -700 \\
-    0 & 0 & 3 & 900
-  \end{bmatrix}
+\text{Span}\{x_1, x_2, \dots, x_i \} = \{a_1x_1 + a_2x_2 + \dots + a_ix_i | x_1, x_2, \dots, x_i \in \mathbb{R}\}
 \end{align}
-
-$x_3$ results in 300 when dividing the constraint by the coefficient of commodity
-$x_3$. For the back substitution, plug in 300 into $x_3$ in equation 2 to solve for 
-$x_2$ resulting in 100. Plug both values into their respective values in equation 1
-to get 450 for $x_1$. As a result, $(x_1, x_2, x_3) = (450, 100, 200)$. As our 
-systems of linear equations begin to scale in size, it isn't practical to solve 
-them by hand. Instead, we will use Python's scientific computing capabilities. 
-
-```{python}
-import numpy as np
-import pandas as pd
-
-data = pd.read_csv('sample.csv')
-
-A = np.array([
-  list(data['Weight']),
-  list(data['Cars']),
-  list(data['Mixture'])
-])
-
-b = np.array([1250, 1800, 300])
-
-def eroLEQ(matrix, constraints):
-  A = matrix
-  b = constraints
-  
-  # Check if m == n in a matrix
-  if A.shape[0] == A.shape[1]:
-    # Note: linalg.solve only accepts square matrices in the 1st parameter
-    return np.linalg.solve(A, b)
-  else:
-    # lstsq for rectangular matrices
-    return np.linalg.lstsq(A, b, rcond = None)[0]
-
-eroLEQ(A, b)
-```
-
-## References

@@ -10,6 +10,9 @@ bibliography: references.bib
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
+<p>{{% notice warning %}}
+Disclaimer: None of the values used represent real-world examples.
+{{% /notice %}}</p>
 <div id="designing-a-system-of-linear-equations" class="section level2">
 <h2>Designing a System of Linear Equations</h2>
 <p>How exactly is linear algebra a key component in many optimization and
@@ -22,7 +25,7 @@ another. However, they can’t transport the entire inventory of each commodity 
 once due to constraints:</p>
 <ul>
 <li>An order of commodities <span class="math inline">\(x_1, x_2,\)</span> and <span class="math inline">\(x_3\)</span> weigh 1, 2, and 3 tons respectively
-as the weight capacity is 1,250 tons.</li>
+as the locomotive weight capacity is 1,250 tons.</li>
 <li>Commodities <span class="math inline">\(x_1, x_2,\)</span> and <span class="math inline">\(x_3\)</span> require 2, 1, and 4 freight cars each with
 1,800 freight cars available.</li>
 <li>Commodities <span class="math inline">\(x_2\)</span> and <span class="math inline">\(x_3\)</span> must total 300 units.</li>
@@ -40,11 +43,11 @@ as the weight capacity is 1,250 tons.</li>
   \end{array}\right]
 \end{align}\]</span></p>
 <blockquote>
-<p>On the left-hand side (LHS), you have your coefficient matrix which is made up
-of the unit values from your commodities. <span class="math inline">\(x_1, x_2, x_3\)</span> are referred to as
-<strong>decision variables</strong> since we’re trying to figure out the quantity needed to
-fulfill our linear equations. On the right-hand side (RHS), we have our
-<strong>constraints</strong> which are our limitations/restrictions.</p>
+<p>On the left-hand side (LHS), as indicated by the vertical line, you have a
+coefficient matrix which is made up of the unit values from your commodities.
+<span class="math inline">\(x_1, x_2, x_3\)</span> are referred to as <strong>decision variables</strong> since we’re trying to
+figure out the quantity needed to fulfill our linear equations. On the right-hand
+side (RHS), we have our <strong>constraints</strong> which are our limitations/restrictions.</p>
 </blockquote>
 </div>
 <div id="solving-a-system-of-linear-equations" class="section level2">
@@ -70,18 +73,18 @@ single unknown.</p>
   \begin{bmatrix}
     1 &amp; 2 &amp; 3 &amp; 150 \\
     0 &amp; -3 &amp; -2 &amp; -700 \\
-    0 &amp; 0 &amp; 3 &amp; 900
+    0 &amp; 0 &amp; 1 &amp; 200
   \end{bmatrix}
 \end{align}\]</span></p>
-<p><span class="math inline">\(x_3\)</span> results in 300 when dividing the constraint by the coefficient of commodity
-<span class="math inline">\(x_3\)</span>. For the back substitution, plug in 300 into <span class="math inline">\(x_3\)</span> in equation 2 to solve for
-<span class="math inline">\(x_2\)</span> resulting in 100. Plug both values into their respective values in equation 1
-to get 450 for <span class="math inline">\(x_1\)</span>. As a result, <span class="math inline">\((x_1, x_2, x_3) = (450, 100, 200)\)</span>. As our
-systems of linear equations begin to scale in size, it isn’t practical to solve
-them by hand. Instead, we will use Python’s scientific computing capabilities.</p>
+<p><span class="math inline">\(x_3\)</span> results in 200 replacing the 3rd equation by finding the sum of equation 2 and
+multiplying the 3rd equation by 3 (to eliminate <span class="math inline">\(x_2\)</span>). For the back substitution,
+plug in 200 into <span class="math inline">\(x_3\)</span> in equation 2 to solve for <span class="math inline">\(x_2\)</span> resulting in 100. Plug
+both values into their respective variables in equation 1 to get 450 for <span class="math inline">\(x_1\)</span>.
+As a result, <span class="math inline">\((x_1, x_2, x_3) = (450, 100, 200)\)</span>. As our systems of linear equations
+begin to scale in size, it isn’t practical to solve them by hand. Instead, we
+will use Python’s scientific computing capabilities.</p>
 <pre class="python"><code>import numpy as np
 import pandas as pd
-
 data = pd.read_csv(&#39;sample.csv&#39;)
 data.head()</code></pre>
 <pre><code>##       Commodity  Weight  Cars  Mixture
@@ -89,16 +92,14 @@ data.head()</code></pre>
 ## 1    Intermodal       2     1        1
 ## 2  Agricultural       3     4        1</code></pre>
 <p>{{% notice info %}}
-The actual matrix itself is inversed to extract the coefficient constraints cleanly as lists.
+The coefficient matrix is inversed to extract the coefficient values cleanly as lists.
 {{% /notice %}}</p>
 <pre class="python"><code>A = np.array([
   list(data[&#39;Weight&#39;]),
   list(data[&#39;Cars&#39;]),
   list(data[&#39;Mixture&#39;])
 ])
-
 b = np.array([1250, 1800, 300])
-
 def eroLEQ(matrix, constraints):
   A = matrix
   b = constraints
@@ -110,9 +111,22 @@ def eroLEQ(matrix, constraints):
   else:
     # lstsq for rectangular matrices
     return np.linalg.lstsq(A, b, rcond = None)[0]
-
 eroLEQ(A, b)</code></pre>
 <pre><code>## array([450., 100., 200.])</code></pre>
+</div>
+<div id="objective-function" class="section level2">
+<h2>Objective Function</h2>
+<p><span class="math display">\[\begin{align}
+\text{Maximize} ~ .01x_1 + .05x_2 + .03x_3 ~~ \text{(Freight Rates)}
+\end{align}\]</span></p>
+<pre class="python"><code>obj_coeffs = [.01, .05, .03]
+np.multiply(obj_coeffs, eroLEQ(A, b))</code></pre>
+<pre><code>## array([4.5, 5. , 6. ])</code></pre>
+<p>The objective function is subject to linear equality and inequality constraints
+in order to maximize/minimize some value. The solution above is one of many
+<strong>feasible solutions</strong> if you were looking to calculate profit. Referring to the
+freight rates from each commodity (by cent per ton-mile), we find that agricultural
+products (<span class="math inline">\(x_3\)</span>) generates the most profit along with a total profit of $15.50.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
