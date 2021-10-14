@@ -52,10 +52,11 @@ side (RHS), we have our **constraints** which are our limitations/restrictions.
 Normally, this problem set would be solved through [gaussian elimination and back 
 substitution](https://www.math.usm.edu/lambers/mat610/sum10/lecture4.pdf). 
 Basically, you're eliminating unknown variables by manipulating equations with
-elementary row reductions. For example, if I wanted to get rid of $x_1$ in the 
-2nd equation, replace the 2nd equation by the sum of multiplying the 1st equation 
+elementary row operations (ERO). For example, if I wanted to get rid of $x_1$ in the 
+2nd equation, I'd replace the 2nd equation by the sum of multiplying the 1st equation 
 by -2 and the 2nd equation itself. You do this repeatedly until an equation has a 
-single unknown. 
+single unknown. The final matrix after conducting EROs and back substitution 
+leaves it in **reduced echelon form (REF).**
 
 \begin{align}
   \left[\begin{array}{@{}ccc|c@{}}
@@ -74,6 +75,16 @@ single unknown.
     0 & 0 & 1 & 200
   \end{bmatrix}
 \end{align}
+
+{{% notice note %}}
+You can reduce the final matrix even further by applying EROs until you are left
+with a single unknown (and a coefficient of 1) in each equation. Imagine a 
+coefficient matrix with a diagonal line of 1s (typically from the upper left to 
+bottom right) while every other element is listed as 0. This is known as 
+**reduced row echelon form (RREF).** This allows a clearer way to find the 
+solution to a system of linear equations without having to constantly perform 
+back substitution on a matrix in REF (increasing the likelihood of mistakes). 
+{{% /notice %}}
 
 $x_3$ results in 200 replacing the 3rd equation by finding the sum of equation 2 and 
 multiplying the 3rd equation by 3 (to eliminate $x_2$). For the back substitution, 
@@ -129,7 +140,7 @@ np.multiply(obj_coeffs, eroLEQ(A, b))
 The objective function is subject to linear equality and inequality constraints 
 in order to maximize/minimize some value. The solution above is one of many 
 **feasible solutions** if you were looking to calculate profit. Referring to the 
-freight rates from each commodity (by cent per ton-mile), we find that agricultural 
+freight rates from each commodity (by cent per ton-mile), we found that agricultural 
 products ($x_3$) generates the most profit along with a total profit of \$15.50.
 
 ## References

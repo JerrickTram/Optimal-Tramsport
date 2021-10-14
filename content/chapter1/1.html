@@ -55,10 +55,11 @@ side (RHS), we have our <strong>constraints</strong> which are our limitations/r
 <p>Normally, this problem set would be solved through <a href="https://www.math.usm.edu/lambers/mat610/sum10/lecture4.pdf">gaussian elimination and back
 substitution</a>.
 Basically, you’re eliminating unknown variables by manipulating equations with
-elementary row reductions. For example, if I wanted to get rid of <span class="math inline">\(x_1\)</span> in the
-2nd equation, replace the 2nd equation by the sum of multiplying the 1st equation
+elementary row operations (ERO). For example, if I wanted to get rid of <span class="math inline">\(x_1\)</span> in the
+2nd equation, I’d replace the 2nd equation by the sum of multiplying the 1st equation
 by -2 and the 2nd equation itself. You do this repeatedly until an equation has a
-single unknown.</p>
+single unknown. The final matrix after conducting EROs and back substitution
+leaves it in <strong>reduced echelon form (REF).</strong></p>
 <p><span class="math display">\[\begin{align}
   \left[\begin{array}{@{}ccc|c@{}}
     -2 &amp; -4 &amp; -6 &amp; -2500 \\
@@ -76,6 +77,15 @@ single unknown.</p>
     0 &amp; 0 &amp; 1 &amp; 200
   \end{bmatrix}
 \end{align}\]</span></p>
+<p>{{% notice note %}}
+You can reduce the final matrix even further by applying EROs until you are left
+with a single unknown (and a coefficient of 1) in each equation. Imagine a
+coefficient matrix with a diagonal line of 1s (typically from the upper left to
+bottom right) while every other element is listed as 0. This is known as
+<strong>reduced row echelon form (RREF).</strong> This allows a clearer way to find the
+solution to a system of linear equations without having to constantly perform
+back substitution on a matrix in REF (increasing the likelihood of mistakes).
+{{% /notice %}}</p>
 <p><span class="math inline">\(x_3\)</span> results in 200 replacing the 3rd equation by finding the sum of equation 2 and
 multiplying the 3rd equation by 3 (to eliminate <span class="math inline">\(x_2\)</span>). For the back substitution,
 plug in 200 into <span class="math inline">\(x_3\)</span> in equation 2 to solve for <span class="math inline">\(x_2\)</span> resulting in 100. Plug
@@ -125,7 +135,7 @@ np.multiply(obj_coeffs, eroLEQ(A, b))</code></pre>
 <p>The objective function is subject to linear equality and inequality constraints
 in order to maximize/minimize some value. The solution above is one of many
 <strong>feasible solutions</strong> if you were looking to calculate profit. Referring to the
-freight rates from each commodity (by cent per ton-mile), we find that agricultural
+freight rates from each commodity (by cent per ton-mile), we found that agricultural
 products (<span class="math inline">\(x_3\)</span>) generates the most profit along with a total profit of $15.50.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
