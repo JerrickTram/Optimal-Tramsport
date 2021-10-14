@@ -1,0 +1,80 @@
+---
+date: "2021-09-12T15:26:15Z"
+description: Text about this post
+images:
+- images/pexels-photo-196666.jpeg
+lastmod: "2021-010-13T15:26:15Z"
+publishdate: "2021-09-12T15:26:15Z"
+title: Home
+bibliography: references.bib
+---
+
+# The Techdoc is a Hugo Theme for technical documentation
+
+For those who aren't familiar with operations research (OR), OR is the mathematical
+modeling used to find the best solution out of many to support better decision
+making. @gass_assad_2005 dates the prominence of OR back to its military origins 
+during WWI and WWII. Scientists worked with the British Royal Navy, the 
+British Royal Air Force (RAF), the British Admiralty, and the US Armed Forces to 
+accomplish notable feats such as:
+
+* Reducing casualty rates of merchant ships from 10% to 0.5% by deploying the 
+convoy system and hunting German U-Boats.
+* Improved air defense capabilities 20-fold with the implementation of radar 
+to detect German aircraft.
+* Establishment of US Military and civilian OR groups.
+* The introduction of the simplex method and linear programming by George B. Dantzig.
+* The creation of the MIT OR Center under Philip M. Morse.
+
+Today, OR categorized under several different names in the form of prescriptive
+analytics, management science, decision science, data science, mathematical
+optimization, and more. While there's many interesting aspects of OR, this book is 
+about applying OR methodology to transporting goods from one place to another
+in a cost-efficient and timely manner. Whether it'd be by port, truck, or rail, 
+freight transport and logistics play a major role in the success of any economy.
+
+## Why I've Created this Website
+
+Honestly, a bit of luck and timing played a role. With the abundant news of
+supply chain issues[^1] (such as port backlogs and inventory shortages) rooting 
+from a myriad of sources, it'd benefit many professionals who want to learn about 
+the quantitative aspects of transporting and delivering goods. Also, it wouldn't 
+hurt to add some elements of risk management as no strategy is 100% guaranteed. 
+While it's ideal to minimize risk, the path to success in life requires taking 
+on some level of risk to achieve the objectives you're aiming for. If you're an 
+experienced practitioner looking for new techniques and methods, this isn't the 
+site to find them. The content in this site isn't too different from classic OR 
+texts like @winston_2004. In addition, this site isn't a guide on how to use 
+Python[^2] or Gurobi[^3] as its assumed that you have some familiarity with those 
+tools. 
+
+[^1]: @chapman_tony_gatewood_clive_2016 for an overview of the supply chain industry.
+
+[^2]: @halvorsen_2020 would be the best book to pick up Python for mathematical applications.
+
+[^3]: Gurobi has a [quick start guide](Gurobi Optimizer Quick Start Guide V9.0.pdf).
+
+## Target Audience
+
+While the contents of this site will be written in an academic context, the 
+main audience is for current and future practitioners. In other words, anyone
+who happened to stumble this site from a search engine. This isn't only about 
+getting a job done but more so of having the "what else can I do with this" mindset. 
+That's how innovation comes to fruition; applying the same tools to different
+things and experimenting. The goal at hand is so that a high school graduate at
+minimum could unleash the creativity in their mind with operations research at 
+their disposal.
+
+## Topics Covered
+
+* Linear Algebra: @bert_tsit1997, @margalit_rabinoff_2019, @halvorsen_2020, @Yoshida2021
+* Linear Programming: @bert_tsit1997, @winston_2004, @kruk2018, @halvorsen_2020
+* Integer Programming: @winston_2004, @kruk2018, @syndershen2019
+* Nonlinear Programming: @winston_2004
+* Stochastic Programming: @winston_2004, @syndershen2019
+* Probability and Statistics: @discover2012, @syndershen2019, @hyndman_athanasopoulos_2021, @kochenderfer2021
+* Dynamic Programming, Queuing Theory, and Simulations: @winston_2004, @halvorsen_2020
+* Combinatorial Optimization: @syndershen2019
+* Global Optimization
+
+## References

@@ -1,8 +1,8 @@
 ---
 date: "2021-09-15"
-lastmod: "2021-10-06"
+lastmod: "2021-10-14"
 draft: false
-title: Linear Independence and Dependence
+title: Determinants
 weight: 40
 ---
 
@@ -18,12 +18,16 @@ weight: 40
 If you've ever heard of redundancy, you're probably heard about it in two 
 different lights:
 
-* In a [just in case (JIC)](https://www.investopedia.com/terms/j/jic.asp) situation. For those in the supply chain industry, 
-that inventory management strategy might be preferred after what's going on 
-with these port backlogs.
-* Removing unnecessary waste
+* In a [just in case (JIC)](https://www.investopedia.com/terms/j/jic.asp) 
+situation. For those in the supply chain industry, that inventory management 
+strategy might be preferred after what's going on with these port backlogs.
+* Removing unnecessary waste 
 
-In the case of linear independence, we're referring to the 2nd option. 
-Vector spaces can have many vectors (with the exception of zero vectors) 
-although we're only interested in a specific one. In most cases, that would be 
-the solution to a system of linear equations.
+In the case of linear independence, we're referring to the 2nd option. We want to
+understand all vectors from a set in all real numbers such that the vector 
+equation has a possible solution. In most cases, that solution would normally be
+the key to solving a system of linear equations. 
+
+\begin{align}
+\text{Span}\{x_1, x_2, \dots, x_i \} = \{a_1x_1 + a_2x_2 + \dots + a_ix_i | x_1, x_2, \dots, x_i \in \bb_{R}\}
+\end{align}

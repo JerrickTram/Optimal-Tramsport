@@ -1,129 +1,118 @@
 ---
 date: "2021-09-15"
-lastmod: "2021-09-25"
+lastmod: "2021-10-14"
 draft: false
-title: Vector Spaces
+title: Systems of Linear Equations
 weight: 20
 bibliography: references.bib
 ---
 
-## Vectors and Matrices
-### Matrix 1
+
+## Designing a System of Linear Equations
+
+How exactly is linear algebra a key component in many optimization and 
+statistics problems? The answer is solving the title of this section. 
+In most optimization problems, we want to find the **best** way to allocate
+resources to accomplish a goal. Not the largest/smallest nor longest/shortest
+way, but **optimal.** Deriving from an example in [@Yoshida2021], a freight rail
+company wants to transport commodities $(x_1, x_2, x_3)$ from one place to 
+another. However, they can't transport the entire inventory of each commodity at 
+once due to constraints:
+
+* An order of commodities $x_1, x_2,$ and $x_3$ weigh 1, 2, and 3 tons respectively 
+as the weight capacity is 1,250 tons. 
+* Commodities $x_1, x_2,$ and $x_3$ require 2, 1, and 4 freight cars each with
+1,800 freight cars available.
+* Commodities $x_2$ and $x_3$ must total 300 units.
+
+\begin{align}
+  \left[\begin{array}{@{}ccc|c@{}}
+    1 & 2 & 3 & 1250 \\
+    2 & 1 & 4 & 1800 \\
+    0 & 1 & 1 & 300
+  \end{array}\right] \leftrightarrow
+  \left[\begin{array}{@{}ccc|c@{}}
+    x_1 & 2x_3 & 3x_3 & 1250 \\
+    2x_1 & x_2 & 4x_3 & 1800 \\
+    & x_2 & x_3 & 300
+  \end{array}\right]
+\end{align}
+
+> On the left-hand side (LHS), you have your coefficient matrix which is made up
+of the unit values from your commodities. $x_1, x_2, x_3$ are referred to as 
+**decision variables** since we're trying to figure out the quantity needed to 
+fulfill our linear equations. On the right-hand side (RHS), we have our 
+**constraints** which are our limitations/restrictions.
+
+## Solving a System of Linear Equations
+
+Normally, this problem set would be solved through [gaussian elimination and back 
+substitution](https://www.math.usm.edu/lambers/mat610/sum10/lecture4.pdf). 
+Basically, you're eliminating unknown variables by manipulating equations with
+elementary row reductions. For example, if I wanted to get rid of $x_1$ in the 
+2nd equation, replace the 2nd equation by the sum of multiplying the 1st equation 
+by -2 and the 2nd equation itself. You do this repeatedly until an equation has a 
+single unknown. 
+
+\begin{align}
+  \left[\begin{array}{@{}ccc|c@{}}
+    -2 & -4 & -6 & -2500 \\
+    2 & 1 & 4 & 1800 \\ \hline
+    0 & -3 & -2 & -700 
+  \end{array}\right] \rightarrow
+    \begin{bmatrix}
+    1 & 2 & 3 & 150 \\
+    0 & -3 & -2 & -700 \\
+    0 & 1 & 1 & 300
+  \end{bmatrix} \rightarrow
+  \begin{bmatrix}
+    1 & 2 & 3 & 150 \\
+    0 & -3 & -2 & -700 \\
+    0 & 0 & 3 & 900
+  \end{bmatrix}
+\end{align}
+
+$x_3$ results in 300 when dividing the constraint by the coefficient of commodity
+$x_3$. For the back substitution, plug in 300 into $x_3$ in equation 2 to solve for 
+$x_2$ resulting in 100. Plug both values into their respective values in equation 1
+to get 450 for $x_1$. As a result, $(x_1, x_2, x_3) = (450, 100, 200)$. As our 
+systems of linear equations begin to scale in size, it isn't practical to solve 
+them by hand. Instead, we will use Python's scientific computing capabilities. 
 
 ```{python}
 import numpy as np
+import pandas as pd
 
-M = np.array([
-  [1, 2, 3],
-  [5, 4, 6],
-  [7, 9, 8]
-])
-
-
-print(M)
+data = pd.read_csv('sample.csv')
+data.head()
 ```
 
-Vectors are 1-dimensional arrays with only 1 row and/or 1 column. For instance,
-a 1 x 4 array would have 1 row and 4 columns. A 4 x 1 array would have 4 rows and 
-1 column. Typically, $m \times n$ is the standard notation to represent arrays/matrices.
-You can probably make an educated guess that matrices aren't restricted to only
-1 unit/variable per dimension. In the case of [Matrix 1], we have a $3 \times 3$
-matrix with 3 rows and 3 columns which is a 2-dimensional array.
-
-### Matrix 2
-
-\begin{align}
-  M = 
-  \begin{bmatrix}
-    a_{11} & a_{12} & \dots & a_{1n} \\
-    a_{21} & a_{22} & \dots & a_{2n} \\
-    \vdots & \vdots & \vdots & \vdots \\
-    a_{m1} & a_{m2} & \dots & a_{mn}
-  \end{bmatrix}
-\end{align}
-
-> The numbers in the *i*th row and *j*th column of matrix *M* are known as the 
-***ij***th element of M notated as $a_{ij}$ [@winston_2004]. Referring back to [Matrix 1], 
-$a_{21}$ would be 2, $a_{33}$ would be 8, and so on.
+{{% notice info %}}
+The actual matrix itself is inversed to extract the coefficient constraints cleanly as lists.
+{{% /notice %}}
 
 ```{python}
-# The value at a12 of matrix 1
-print(M[0][1])
-```
-
-The above statement was run in `Python` to find the $a_{12}$th element of [Matrix 1]. 
-Note that Python uses 0-based numbering so when referring to the entire 1st row 
-of a matrix, **you would start at 0 instead of 1** i.e. `matrixname[0]`.
-
-## Matrix Arithmetic
-
-If you recall the PEMDAS mnemonic device from K-12, the same logic applies when 
-using matrix operations. Any matrix $M$ and number $c$ (sometimes called scalars),
-the matrix $cA$ exists by multiplying $c$ by each element of $A$. In other words,
-the distribution property at play. No different from multiplying a matrix by
-another matrix although they apply to corresponding elements i.e. $a_{11} \times b_{11}$.
-
-```{python}
-3*M
-```
-
-> Another way to represent the result above is: 
-\begin{align}
-  \begin{bmatrix}
-    3 & 3 & 3 \\
-    3 & 3 & 3 \\
-    3 & 3 & 3
-  \end{bmatrix}
-  \times 
-  \begin{bmatrix}
-    1 & 2 & 3 \\
-    5 & 4 & 6 \\
-    7 & 9 & 8
-  \end{bmatrix}
-\end{align}
-
-## Practical Applications
-
-This example is derived from [@maynard_zandin_2001]. You're an industrial 
-engineer in charge of improving operations for an aerospace firm. However,
-you also need to know what productivity measures/results to look for before
-starting to look into processes. After all, the main goal of any for-profit 
-organization is to produce high-quality products at reasonable prices and 
-delivery times. Because COVID has disrupted supply chains worldwide, you're 
-prioritizing ways to improve cycle times. The 1st matrix involves 
-the production time (days) of product $a_{ij}$ while the 2nd matrix 
-involves the total orders of product $a_{ij}$ (per 1000 orders). We want to 
-find the cycle times through **dividing production time by order volume** of product $a_{ij}$. 
-
-```{python, echo = F}
-np.random.seed(1234)
-
-time = np.array([
-  list(np.random.randint(10, 100, 3)),
-  list(np.random.randint(10, 100, 3)),
-  list(np.random.randint(10, 100, 3))
+A = np.array([
+  list(data['Weight']),
+  list(data['Cars']),
+  list(data['Mixture'])
 ])
 
-orders = np.array([
-  list(np.random.randint(1, 10, 3)),
-  list(np.random.randint(1, 10, 3)),
-  list(np.random.randint(1, 10, 3))
-])
+b = np.array([1250, 1800, 300])
 
-cycletime = np.divide(time, orders)
+def eroLEQ(matrix, constraints):
+  A = matrix
+  b = constraints
+  
+  # Check if m == n in a matrix
+  if A.shape[0] == A.shape[1]:
+    # Note: linalg.solve only accepts square matrices in the 1st parameter
+    return np.linalg.solve(A, b)
+  else:
+    # lstsq for rectangular matrices
+    return np.linalg.lstsq(A, b, rcond = None)[0]
 
-print(time)
-print(orders)
-print(cycletime)
+eroLEQ(A, b)
 ```
-
-Its best to talk with the production team for their assessment of the production
-time of product $a_{ij}$. That way, you have a better way to measure cycle time
-vs throwing a random figure out there. Depending on the product, the cycle times
-of products $a_{13}, a_{23}$ and $a_{32}$ **might** (I'm emphasizing this for 
-reason) be an issue. The time it takes to manufacture microchips vs the F-35
-Lighting II (combat aircraft) differ massively. There are other productivity
-measurements such as labor costs, dollars per square foot, etc. from
-[@maynard_zandin_2001] if you have further interest in productivity metrics.
 
 ## References

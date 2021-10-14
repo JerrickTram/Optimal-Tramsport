@@ -1,8 +1,8 @@
 baseURL: https://ise-or-docs.netlify.app/
 languageCode: en-us
 DefaultContentLanguage: en
-title: OR Docs
-theme: hugo-theme-techdoc
+title: Operations Research Applications in Freight Transport and Logistics
+theme: ["hugo-notice", "hugo-theme-techdoc"]
 hasCJKLanguage: yes
 metaDataFormat: yaml
 defaultContentLanguage: en
@@ -46,7 +46,7 @@ params:
   menu_style: slide-menu
   tag_manager_container_id: ''
   title: TechDoc
-  version: 1.1.2
+  version: 1.2.0
 menu:
   main:
     - name: Home
