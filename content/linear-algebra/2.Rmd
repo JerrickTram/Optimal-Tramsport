@@ -21,8 +21,9 @@ If you've ever heard of redundancy, you're probably heard about it in two
 different lights:
 
 * In a [just in case (JIC)](https://www.investopedia.com/terms/j/jic.asp) 
-situation. For those in the supply chain industry, that inventory management 
-strategy might be preferred after what's going on with these port backlogs.
+situation, that inventory management strategy focuses on keeping some products
+at hand to avoid shortages. With the abundance of shortages nowadays with COVID
+playing a role in port backlogs, this strategy might be preferable at this time.
 * In a [just in time (JIT)](https://www.investopedia.com/terms/j/jit.asp) situation, 
 that inventory management strategy prioritizes removing unnecessary waste and 
 increasing efficiency.

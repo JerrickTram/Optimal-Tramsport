@@ -45,3 +45,8 @@ algebra towards developing working knowledge. These topics include:
 * [Determinants](./3)
 * [Orthogonality](./4)
 * [Eigenvalues and Eigenvectors](./5)
+
+{{% notice note %}}
+In linear algebra, standard notation for representing rows and columns in a vector
+or matrix is m x n respectively.
+{{% /notice %}}

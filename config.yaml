@@ -40,6 +40,7 @@ params:
     - archives
     - archive
     - blog
+    - casestudies
     - entry
     - post
     - posts

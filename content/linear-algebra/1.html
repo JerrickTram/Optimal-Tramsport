@@ -13,16 +13,16 @@ bibliography: references.bib
 <p>{{% notice warning %}}
 Disclaimer: None of the values used represent real-world examples.
 {{% /notice %}}</p>
-<div id="designing-a-system-of-linear-equations" class="section level2">
+<div id="problem" class="section level2">
 <h2>Designing a System of Linear Equations</h2>
 <p>How exactly is linear algebra a key component in many optimization and
 statistics problems? The answer is solving the title of this section.
 In most optimization problems, we want to find the <strong>best</strong> way to allocate
 resources to accomplish a goal. Not the largest/smallest nor longest/shortest
-way, but <strong>optimal.</strong> Deriving from an example in <span class="citation">(<a href="#ref-Yoshida2021" role="doc-biblioref">Yoshida 2021</a>)</span>, a freight rail
-company wants to transport commodities <span class="math inline">\((x_1, x_2, x_3)\)</span> from one place to
-another. However, they can’t transport the entire inventory of each commodity at
-once due to constraints:</p>
+way, but <strong>optimal.</strong> In this example, a freight rail company wants to transport
+commodities <span class="math inline">\((x_1, x_2, x_3)\)</span> from one place to another while maximizing profits.
+However, they can’t transport entire inventories of each commodity at once due
+to <strong>constraints (limitations, conditions, or restrictions):</strong></p>
 <ul>
 <li>An order of commodities <span class="math inline">\(x_1, x_2,\)</span> and <span class="math inline">\(x_3\)</span> weigh 1, 2, and 3 tons respectively
 as the locomotive weight capacity is 1,250 tons.</li>
@@ -37,7 +37,7 @@ as the locomotive weight capacity is 1,250 tons.</li>
     0 &amp; 1 &amp; 1 &amp; 300
   \end{array}\right] \leftrightarrow
   \left[\begin{array}{@{}ccc|c@{}}
-    x_1 &amp; 2x_3 &amp; 3x_3 &amp; 1250 \\
+    x_1 &amp; 2x_2 &amp; 3x_3 &amp; 1250 \\
     2x_1 &amp; x_2 &amp; 4x_3 &amp; 1800 \\
     &amp; x_2 &amp; x_3 &amp; 300
   \end{array}\right]
@@ -47,15 +47,141 @@ as the locomotive weight capacity is 1,250 tons.</li>
 coefficient matrix which is made up of the unit values from your commodities.
 <span class="math inline">\(x_1, x_2, x_3\)</span> are referred to as <strong>decision variables</strong> since we’re trying to
 figure out the quantity needed to fulfill our linear equations. On the right-hand
-side (RHS), we have our <strong>constraints</strong> which are our limitations/restrictions.</p>
+side (RHS), we have our constraints.</p>
 </blockquote>
+</div>
+<div id="matrix-arithmetic" class="section level2">
+<h2>Matrix Arithmetic</h2>
+<div id="matrix-addition" class="section level3">
+<h3>Matrix Addition</h3>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix}
+    1 &amp; 2 \\
+    5 &amp; 6
+  \end{bmatrix} +
+  \begin{bmatrix}
+    5 &amp; 4 \\
+    1 &amp; 1
+  \end{bmatrix} =
+  \begin{bmatrix}
+    6 &amp; 6 \\
+    6 &amp; 7
+  \end{bmatrix}
+\end{align}\]</span></p>
+<p>Matrix addition isn’t that much different from normal addition except that you’re
+going based on corresponding positions. For example, <span class="math inline">\(A_{1,1}\)</span> is only being added by
+<span class="math inline">\(B_{1,1}\)</span>. In this case, 1 is the element in <span class="math inline">\(A\)</span> and 5 is the element in <span class="math inline">\(B\)</span>.</p>
+<pre class="python"><code>import numpy as np
+
+A = np.matrix([[1, 2],
+             [5, 6]])
+B = np.matrix([[5, 4],
+             [1, 1]])
+
+np.add(A, B)</code></pre>
+<pre><code>## matrix([[6, 6],
+##         [6, 7]])</code></pre>
+</div>
+<div id="matrix-scalar-multiplication" class="section level3">
+<h3>Matrix Scalar Multiplication</h3>
+<p><span class="math display">\[\begin{align}
+  3
+  \begin{bmatrix}
+    1 &amp; 2 \\
+    5 &amp; 6
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    3 &amp; 6 \\
+    15 &amp; 18
+  \end{bmatrix}
+\end{align}\]</span></p>
+<pre class="python"><code>3 * A</code></pre>
+<pre><code>## matrix([[ 3,  6],
+##         [15, 18]])</code></pre>
+</div>
+<div id="matrix-multiplication" class="section level3">
+<h3>Matrix Multiplication</h3>
+<p>{{% notice note %}}
+Disclaimer: Pay extra attention in this section as many problems in OR involve
+some form of matrix multiplication.
+{{% /notice %}}</p>
+<pre class="python"><code>np.random.seed(1234)
+
+A = np.matrix(np.random.randint(20, size = (10, 3)))
+B = np.matrix(np.random.randint(20, size = (3, 5)))
+
+print(A)</code></pre>
+<pre><code>## [[15 19  6]
+##  [12 15 17]
+##  [ 9 11 12]
+##  [16  5 16]
+##  [ 9 15 18]
+##  [16 12  5]
+##  [ 2  6  3]
+##  [ 7 11  0]
+##  [ 9 11 16]
+##  [ 3  2 19]]</code></pre>
+<pre class="python"><code>print(B)</code></pre>
+<pre><code>## [[12  1 11 19 11]
+##  [17 14 19  7 10]
+##  [11 14 17 13  0]]</code></pre>
+<pre class="python"><code>np.matmul(A, B)</code></pre>
+<pre><code>## matrix([[569, 365, 628, 496, 355],
+##         [586, 460, 706, 554, 282],
+##         [427, 331, 512, 404, 209],
+##         [453, 310, 543, 547, 226],
+##         [561, 471, 690, 510, 249],
+##         [451, 254, 489, 453, 296],
+##         [159, 128, 187, 119,  82],
+##         [271, 161, 286, 210, 187],
+##         [471, 387, 580, 456, 209],
+##         [279, 297, 394, 318,  53]])</code></pre>
+<p>Matrix multiplication isn’t as straightforward as regular multiplication due to
+several conditions:</p>
+<ul>
+<li>The total columns in Matrix <span class="math inline">\(A\)</span> must equal the total rows in Matrix <span class="math inline">\(B\)</span></li>
+<li>The total rows from the final Matrix <span class="math inline">\(C\)</span> must equal the total rows in Matrix <span class="math inline">\(A\)</span></li>
+<li>The total columns from the final Matrix <span class="math inline">\(C\)</span> must equal the total columns in Matrix <span class="math inline">\(B\)</span></li>
+</ul>
+<p>Unlike normal multiplication, <strong>matrix multiplication doesn’t multiply by corresponding
+element position i.e. <span class="math inline">\(A_{2, 1} \times B_{2, 1}\)</span>.</strong> Rather, the elements in the
+final matrix are based on <strong>the sum product of corresponding rows and columns.</strong>
+In other words, to find <span class="math inline">\(C_{2, 3}\)</span>, you multiply <span class="math inline">\(A_{2, n}\)</span> (the entire 2nd row)
+by <span class="math inline">\(B_{m, 3}\)</span> (the entire 3rd column). The reasoning: <strong>linear combinations.</strong></p>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix}
+    12 &amp; 15 &amp; 17
+  \end{bmatrix} 
+  \begin{bmatrix}
+    11 \\
+    19 \\
+    17
+  \end{bmatrix} = 
+  12(11) + 15(19)+17(17) = 706
+\end{align}\]</span></p>
+</div>
+<div id="transposing-a-matrix" class="section level3">
+<h3>Transposing a Matrix</h3>
+<p><span class="math display">\[\begin{align}
+A = 
+  \begin{bmatrix}
+    1 &amp; 2 &amp; 3 \\
+    4 &amp; 5 &amp; 6
+  \end{bmatrix} \leftrightarrow A&#39; = A^T =
+  \begin{bmatrix}
+    1 &amp; 4 \\
+    2 &amp; 5 \\
+    3 &amp; 6
+  \end{bmatrix}
+\end{align}\]</span></p>
+</div>
 </div>
 <div id="solving-a-system-of-linear-equations" class="section level2">
 <h2>Solving a System of Linear Equations</h2>
 <p>Normally, this problem set would be solved through <a href="https://www.math.usm.edu/lambers/mat610/sum10/lecture4.pdf">gaussian elimination and back
 substitution</a>.
 Basically, you’re eliminating unknown variables by manipulating equations with
-elementary row operations (ERO). For example, if I wanted to get rid of <span class="math inline">\(x_1\)</span> in the
+elementary row operations (EROs). For example, if I wanted to get rid of <span class="math inline">\(x_1\)</span> in the
 2nd equation, I’d replace the 2nd equation by the sum of multiplying the 1st equation
 by -2 and the 2nd equation itself. You do this repeatedly until an equation has a
 single unknown. The final matrix after conducting EROs and back substitution
@@ -86,15 +212,14 @@ bottom right) while every other element is listed as 0. This is known as
 solution to a system of linear equations without having to constantly perform
 back substitution on a matrix in REF (increasing the likelihood of mistakes).
 {{% /notice %}}</p>
-<p><span class="math inline">\(x_3\)</span> results in 200 replacing the 3rd equation by finding the sum of equation 2 and
+<p><span class="math inline">\(x_3\)</span> results in 200 from replacing the 3rd equation by finding the sum of equation 2 and
 multiplying the 3rd equation by 3 (to eliminate <span class="math inline">\(x_2\)</span>). For the back substitution,
 plug in 200 into <span class="math inline">\(x_3\)</span> in equation 2 to solve for <span class="math inline">\(x_2\)</span> resulting in 100. Plug
 both values into their respective variables in equation 1 to get 450 for <span class="math inline">\(x_1\)</span>.
 As a result, <span class="math inline">\((x_1, x_2, x_3) = (450, 100, 200)\)</span>. As our systems of linear equations
 begin to scale in size, it isn’t practical to solve them by hand. Instead, we
 will use Python’s scientific computing capabilities.</p>
-<pre class="python"><code>import numpy as np
-import pandas as pd
+<pre class="python"><code>import pandas as pd
 data = pd.read_csv(&#39;sample.csv&#39;)
 data.head()</code></pre>
 <pre><code>##       Commodity  Weight  Cars  Mixture
@@ -110,16 +235,18 @@ The coefficient matrix is inversed to extract the coefficient values cleanly as 
   list(data[&#39;Mixture&#39;])
 ])
 b = np.array([1250, 1800, 300])
+
+# Applies elementary row operations to a system of linear equations
 def eroLEQ(matrix, constraints):
   A = matrix
   b = constraints
   
-  # Check if m == n in a matrix
+  # Check if the matrix has the same number of rows and columns
   if A.shape[0] == A.shape[1]:
     # Note: linalg.solve only accepts square matrices in the 1st parameter
     return np.linalg.solve(A, b)
   else:
-    # lstsq for rectangular matrices
+    # lstsq for non-square matrices
     return np.linalg.lstsq(A, b, rcond = None)[0]
 eroLEQ(A, b)</code></pre>
 <pre><code>## array([450., 100., 200.])</code></pre>
@@ -135,14 +262,15 @@ np.multiply(obj_coeffs, eroLEQ(A, b))</code></pre>
 <p>The objective function is subject to linear equality and inequality constraints
 in order to maximize/minimize some value. The solution above is one of many
 <strong>feasible solutions</strong> if you were looking to calculate profit. Referring to the
-freight rates from each commodity (by cent per ton-mile), we found that agricultural
-products (<span class="math inline">\(x_3\)</span>) generates the most profit along with a total profit of $15.50.</p>
-</div>
-<div id="references" class="section level2 unnumbered">
-<h2>References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Yoshida2021" class="csl-entry">
-Yoshida, Ruriko. 2021. <em>Linear Algebra and Its Applications with <span>R</span></em>. Taylor; Francis.
-</div>
-</div>
+[problem] from before, based on freight rates of each commodity (by cent per ton-mile),
+we generated a total profit of $15.50 subject to the constraints at hand. By putting
+together our objective function and constraints, we have the framework of a standard
+OR model:</p>
+<p><span class="math display">\[\begin{align}
+  \text{Maximize} ~ .01x_1 + .05x_2 + .03x_3 ~ s.t. \\
+  x_1 + 2x_2 + 3x_3 &amp; = 1250 \\
+  2x_1 + x_2 + 4x_3 &amp; = 1800 \\
+  x_2 + x_3 &amp; = 300 \\
+  x_1, x_2, x_3 \geq 0
+\end{align}\]</span></p>
 </div>
