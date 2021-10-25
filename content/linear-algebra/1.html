@@ -13,16 +13,16 @@ bibliography: references.bib
 <p>{{% notice warning %}}
 Disclaimer: None of the values used represent real-world examples.
 {{% /notice %}}</p>
-<div id="problem" class="section level2">
+<div id="designing-a-system-of-linear-equations" class="section level2">
 <h2>Designing a System of Linear Equations</h2>
 <p>How exactly is linear algebra a key component in many optimization and
 statistics problems? The answer is solving the title of this section.
-In most optimization problems, we want to find the <strong>best</strong> way to allocate
+In most optimization problems, we want to find the best way to allocate
 resources to accomplish a goal. Not the largest/smallest nor longest/shortest
-way, but <strong>optimal.</strong> In this example, a freight rail company wants to transport
-commodities <span class="math inline">\((x_1, x_2, x_3)\)</span> from one place to another while maximizing profits.
-However, they can’t transport entire inventories of each commodity at once due
-to <strong>constraints (limitations, conditions, or restrictions):</strong></p>
+way, but an <strong>optimal solution.</strong> In this example, a freight rail company wants
+to transport commodities <span class="math inline">\((x_1, x_2, x_3)\)</span> from one place to another while
+maximizing profits. However, they can’t transport entire inventories of each
+commodity at once due to <strong>constraints (limitations, conditions, or restrictions):</strong></p>
 <ul>
 <li>An order of commodities <span class="math inline">\(x_1, x_2,\)</span> and <span class="math inline">\(x_3\)</span> weigh 1, 2, and 3 tons respectively
 as the locomotive weight capacity is 1,250 tons.</li>
@@ -105,10 +105,24 @@ np.add(A, B)</code></pre>
 Disclaimer: Pay extra attention in this section as many problems in OR involve
 some form of matrix multiplication.
 {{% /notice %}}</p>
+<p>Matrix multiplication isn’t as straightforward as regular multiplication due to
+several conditions:</p>
+<ul>
+<li>The total columns in Matrix <span class="math inline">\(A\)</span> must equal the total rows in Matrix <span class="math inline">\(B\)</span></li>
+<li>The total rows from the final Matrix <span class="math inline">\(C\)</span> must equal the total rows in Matrix <span class="math inline">\(A\)</span></li>
+<li>The total columns from the final Matrix <span class="math inline">\(C\)</span> must equal the total columns in Matrix <span class="math inline">\(B\)</span></li>
+</ul>
+<p>In layman terms, an <span class="math inline">\(m \times n\)</span> matrix and an <span class="math inline">\(n \times p\)</span> matrix results in
+an <span class="math inline">\(m \times p\)</span> matrix. Because the order of the matrices matter, matrix
+multiplication isn’t “commutative.” If you tried to perform matrix
+multiplication with the matrices in a different order, an <span class="math inline">\(n \times p\)</span> matrix an
+<span class="math inline">\(m \times n\)</span> matrix results in an <span class="math inline">\(n \times n\)</span> matrix. To simplify this:
+<span class="math inline">\(AB = C \neq BA = C\)</span>. When finding the elements in <span class="math inline">\(C\)</span>, they’re based on
+<strong>dot product.</strong></p>
 <pre class="python"><code>np.random.seed(1234)
 
-A = np.matrix(np.random.randint(20, size = (10, 3)))
-B = np.matrix(np.random.randint(20, size = (3, 5)))
+A = np.random.randint(20, size = (10, 3))
+B = np.random.randint(20, size = (3, 5))
 
 print(A)</code></pre>
 <pre><code>## [[15 19  6]
@@ -126,29 +140,18 @@ print(A)</code></pre>
 ##  [17 14 19  7 10]
 ##  [11 14 17 13  0]]</code></pre>
 <pre class="python"><code>np.matmul(A, B)</code></pre>
-<pre><code>## matrix([[569, 365, 628, 496, 355],
-##         [586, 460, 706, 554, 282],
-##         [427, 331, 512, 404, 209],
-##         [453, 310, 543, 547, 226],
-##         [561, 471, 690, 510, 249],
-##         [451, 254, 489, 453, 296],
-##         [159, 128, 187, 119,  82],
-##         [271, 161, 286, 210, 187],
-##         [471, 387, 580, 456, 209],
-##         [279, 297, 394, 318,  53]])</code></pre>
-<p>Matrix multiplication isn’t as straightforward as regular multiplication due to
-several conditions:</p>
-<ul>
-<li>The total columns in Matrix <span class="math inline">\(A\)</span> must equal the total rows in Matrix <span class="math inline">\(B\)</span></li>
-<li>The total rows from the final Matrix <span class="math inline">\(C\)</span> must equal the total rows in Matrix <span class="math inline">\(A\)</span></li>
-<li>The total columns from the final Matrix <span class="math inline">\(C\)</span> must equal the total columns in Matrix <span class="math inline">\(B\)</span></li>
-</ul>
-<p>Unlike normal multiplication, <strong>matrix multiplication doesn’t multiply by corresponding
-element position i.e. <span class="math inline">\(A_{2, 1} \times B_{2, 1}\)</span>.</strong> Rather, the elements in the
-final matrix are based on <strong>the sum product of corresponding rows and columns.</strong>
-In other words, to find <span class="math inline">\(C_{2, 3}\)</span>, you multiply <span class="math inline">\(A_{2, n}\)</span> (the entire 2nd row)
-by <span class="math inline">\(B_{m, 3}\)</span> (the entire 3rd column). The reasoning: <strong>linear combinations.</strong></p>
+<pre><code>## array([[569, 365, 628, 496, 355],
+##        [586, 460, 706, 554, 282],
+##        [427, 331, 512, 404, 209],
+##        [453, 310, 543, 547, 226],
+##        [561, 471, 690, 510, 249],
+##        [451, 254, 489, 453, 296],
+##        [159, 128, 187, 119,  82],
+##        [271, 161, 286, 210, 187],
+##        [471, 387, 580, 456, 209],
+##        [279, 297, 394, 318,  53]])</code></pre>
 <p><span class="math display">\[\begin{align}
+  A_{2,1}B_{1,3} + A_{2,2}B_{2,3} + \dots + A_{2,n}B_{m,3} &amp; = C_{2,3} \\
   \begin{bmatrix}
     12 &amp; 15 &amp; 17
   \end{bmatrix} 
@@ -157,23 +160,9 @@ by <span class="math inline">\(B_{m, 3}\)</span> (the entire 3rd column). The re
     19 \\
     17
   \end{bmatrix} = 
-  12(11) + 15(19)+17(17) = 706
+  12(11) + 15(19)+17(17) &amp; = 706 
 \end{align}\]</span></p>
-</div>
-<div id="transposing-a-matrix" class="section level3">
-<h3>Transposing a Matrix</h3>
-<p><span class="math display">\[\begin{align}
-A = 
-  \begin{bmatrix}
-    1 &amp; 2 &amp; 3 \\
-    4 &amp; 5 &amp; 6
-  \end{bmatrix} \leftrightarrow A&#39; = A^T =
-  \begin{bmatrix}
-    1 &amp; 4 \\
-    2 &amp; 5 \\
-    3 &amp; 6
-  \end{bmatrix}
-\end{align}\]</span></p>
+<p>Essentially, <strong>matrix multiplication is a set of linear combinations.</strong></p>
 </div>
 </div>
 <div id="solving-a-system-of-linear-equations" class="section level2">
@@ -185,7 +174,7 @@ elementary row operations (EROs). For example, if I wanted to get rid of <span c
 2nd equation, I’d replace the 2nd equation by the sum of multiplying the 1st equation
 by -2 and the 2nd equation itself. You do this repeatedly until an equation has a
 single unknown. The final matrix after conducting EROs and back substitution
-leaves it in <strong>reduced echelon form (REF).</strong></p>
+leaves it in <strong>row echelon form (REF).</strong></p>
 <p><span class="math display">\[\begin{align}
   \left[\begin{array}{@{}ccc|c@{}}
     -2 &amp; -4 &amp; -6 &amp; -2500 \\
@@ -251,26 +240,77 @@ def eroLEQ(matrix, constraints):
 eroLEQ(A, b)</code></pre>
 <pre><code>## array([450., 100., 200.])</code></pre>
 </div>
-<div id="objective-function" class="section level2">
-<h2>Objective Function</h2>
-<p><span class="math display">\[\begin{align}
-\text{Maximize} ~ .01x_1 + .05x_2 + .03x_3 ~~ \text{(Freight Rates)}
-\end{align}\]</span></p>
-<pre class="python"><code>obj_coeffs = [.01, .05, .03]
-np.multiply(obj_coeffs, eroLEQ(A, b))</code></pre>
-<pre><code>## array([4.5, 5. , 6. ])</code></pre>
-<p>The objective function is subject to linear equality and inequality constraints
-in order to maximize/minimize some value. The solution above is one of many
-<strong>feasible solutions</strong> if you were looking to calculate profit. Referring to the
-[problem] from before, based on freight rates of each commodity (by cent per ton-mile),
-we generated a total profit of $15.50 subject to the constraints at hand. By putting
-together our objective function and constraints, we have the framework of a standard
-OR model:</p>
-<p><span class="math display">\[\begin{align}
-  \text{Maximize} ~ .01x_1 + .05x_2 + .03x_3 ~ s.t. \\
-  x_1 + 2x_2 + 3x_3 &amp; = 1250 \\
-  2x_1 + x_2 + 4x_3 &amp; = 1800 \\
-  x_2 + x_3 &amp; = 300 \\
-  x_1, x_2, x_3 \geq 0
-\end{align}\]</span></p>
+<div id="using-gurobi" class="section level2">
+<h2>Using Gurobi</h2>
+<pre class="python"><code>T = Model(&quot;Commodity&quot;)</code></pre>
+<pre><code>## Using license file C:\Users\Jerrick Tram\gurobi.lic</code></pre>
+<pre class="python"><code>x1 = T.addVar(name=&quot;Coal&quot;)
+x2 = T.addVar(name=&quot;Intermodal&quot;)
+x3 = T.addVar(name=&quot;Agricultural&quot;)
+
+T.setObjective(.01*x1 + .03*x2 + .04*x3, GRB.MAXIMIZE)
+
+T.addConstr(1*x1 + 2*x2 + 3*x3 == 1250, &quot;Weight&quot;)</code></pre>
+<pre><code>## &lt;gurobi.Constr *Awaiting Model Update*&gt;</code></pre>
+<pre class="python"><code>T.addConstr(2*x1 + 1*x2 + 4*x3 == 1800, &quot;Capacity&quot;)</code></pre>
+<pre><code>## &lt;gurobi.Constr *Awaiting Model Update*&gt;</code></pre>
+<pre class="python"><code>T.addConstr(1*x2 + 1*x3 == 300, &quot;Mixture&quot;)</code></pre>
+<pre><code>## &lt;gurobi.Constr *Awaiting Model Update*&gt;</code></pre>
+<pre class="python"><code>T.optimize()</code></pre>
+<pre><code>## Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
+## Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+## Optimize a model with 3 rows, 3 columns and 8 nonzeros
+## Model fingerprint: 0x42f96496
+## Coefficient statistics:
+##   Matrix range     [1e+00, 4e+00]
+##   Objective range  [1e-02, 4e-02]
+##   Bounds range     [0e+00, 0e+00]
+##   RHS range        [3e+02, 2e+03]
+## Presolve removed 3 rows and 3 columns
+## Presolve time: 0.01s
+## Presolve: All rows and columns removed
+## Iteration    Objective       Primal Inf.    Dual Inf.      Time
+##        0    1.5500000e+01   0.000000e+00   0.000000e+00      0s
+## 
+## Solved in 0 iterations and 0.02 seconds
+## Optimal objective  1.550000000e+01</code></pre>
+<pre class="python"><code>for i in T.getVars():
+  print(f&#39;{i.varName}: {i.x}.&#39;)
+  </code></pre>
+<pre><code>## Coal: 450.0.
+## Intermodal: 100.0.
+## Agricultural: 200.0.</code></pre>
+<pre class="python"><code>print(f&#39;Optimal total revenue: {T.objVal}.&#39;)</code></pre>
+<pre><code>## Optimal total revenue: 15.5.</code></pre>
+</div>
+<div id="terminology" class="section level2">
+<h2>Terminology</h2>
+<ul>
+<li><strong>Optimal Solution:</strong> Any feasible solution that maximizes/minimizes the objective value.</li>
+<li><strong>Constraints</strong>: Restrictions on the quantities of decision variables
+available.</li>
+<li><strong>Decision Variables:</strong> Variables whose quantities affect the objective value
+in a decision-making process.</li>
+<li><strong>Dot Product:</strong> The multiplication of two vectors with the same number of elements.</li>
+<li><strong>Row Echelon Form (REF):</strong> According to <span class="citation"><a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">Margalit and Rabinoff</a> (<a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">2019</a>)</span>, a matrix is in REF if:
+<ul>
+<li>All nonzero rows are above rows of all 0s.</li>
+<li>The leading nonzero entry of a row is to the <em>right</em> of the 1st nonzero entry of the row above.</li>
+<li>Below the pivot, all entries are 0.</li>
+</ul></li>
+<li><strong>Reduced Row Echelon Form (RREF):</strong> According to <span class="citation"><a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">Margalit and Rabinoff</a> (<a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">2019</a>)</span>, a
+matrix is in RREF if it is in REF and:
+<ul>
+<li>The pivot is equal to 1.</li>
+<li>The pivot is the <em>only</em> nonzero entry in its column.</li>
+</ul></li>
+</ul>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-margalit_rabinoff_2019" class="csl-entry">
+Margalit, Dan, and Joseph Rabinoff. 2019. <em>Interactive Linear Algebra</em>. Georgia Tech.
+</div>
+</div>
 </div>

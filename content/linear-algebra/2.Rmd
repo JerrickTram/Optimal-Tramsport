@@ -7,16 +7,6 @@ weight: 30
 bibliography: references.bib
 ---
 
-
-<center>
-
-<figure>
-  <img src="https://s3-us-west-2.amazonaws.com/courses-images-archive-read-only/wp-content/uploads/sites/924/2015/11/25201151/CNX_Precalc_Figure_02_03_006abc2.jpg" alt="ind" style="width:100%">
-  <figcaption>Source: Lumen Learning - College Algebra</figcaption>
-</figure>
-
-</center>
-
 If you've ever heard of redundancy, you're probably heard about it in two 
 different lights:
 
@@ -28,11 +18,6 @@ playing a role in port backlogs, this strategy might be preferable at this time.
 that inventory management strategy prioritizes removing unnecessary waste and 
 increasing efficiency.
 
-In the case of linear independence, we're referring to the 2nd option. We want to
-understand all vectors from a set in all real numbers such that the vector 
-equation has a possible solution. In most cases, that solution would normally be
-the key to solving a system of linear equations.
-
-\begin{align}
-\text{Span}\{x_1, x_2, \dots, x_i \} = \{a_1x_1 + a_2x_2 + \dots + a_ix_i | x_1, x_2, \dots, x_i \in \mathbb{R}\}
-\end{align}
+In the case of linear independence, we're referring to the 2nd option. There are 
+many potential solutions to solve any given problem. In linear algebra, there
+are also infinitely **linear combinations** of 

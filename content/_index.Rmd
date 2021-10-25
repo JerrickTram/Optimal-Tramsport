@@ -52,17 +52,18 @@ tools.
 
 [^2]: @halvorsen_2020 would be the best book to pick up Python for mathematical applications.
 
-[^3]: Gurobi has a [quick start guide](Gurobi Optimizer Quick Start Guide V9.0.pdf).
+[^3]: Gurobi has a [quick start guide]().
 
 ## Target Audience
 
 While the contents of this site will be written in an academic context, the 
 main audience is for current and future practitioners. In other words, anyone
-who happened to stumble this site from a search engine. This isn't only about 
+who stumbled upon this site through a search engine. This isn't only about 
 getting a job done but more so of having the "what else can I do with this" mindset. 
 That's how innovation comes to fruition; applying the same tools to different
-things and experimenting. The goal at hand is so that a high school graduate at
-minimum could unleash the creativity in their mind with operations research at 
+things and experimenting. For instance, there's plenty of research done on airline
+routing but what about ships or drones? The goal at hand is so that a high school 
+graduate at minimum could unleash their creativity with operations research at 
 their disposal.
 
 ## Topics Covered
@@ -72,9 +73,10 @@ their disposal.
 * Integer Programming: @winston_2004, @kruk2018, @syndershen2019
 * Nonlinear Programming: @winston_2004
 * Stochastic Programming: @winston_2004, @syndershen2019
-* Probability and Statistics: @discover2012, @syndershen2019, @hyndman_athanasopoulos_2021, @kochenderfer2021
+* Forecasting: @winston_2004, @syndershen2019
 * Dynamic Programming, Queuing Theory, and Simulations: @winston_2004, @halvorsen_2020
 * Combinatorial Optimization: @syndershen2019
 * Global Optimization
+* Probability and Statistics: @discover2012, @syndershen2019, @hyndman_athanasopoulos_2021, @kochenderfer2021
 
 ## References

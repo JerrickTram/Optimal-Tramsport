@@ -1,7 +1,7 @@
 baseURL: https://ise-or-docs.netlify.app/
 languageCode: en-us
 DefaultContentLanguage: en
-title: Operations Research Applications in Freight Transport and Logistics
+title: Optimal Tramsport
 theme: ["hugo-notice", "hugo-theme-techdoc"]
 hasCJKLanguage: yes
 metaDataFormat: yaml
@@ -30,7 +30,7 @@ params:
   custom_background_color: 'black'
   custom_font_color: ''
   dateformat: ''
-  description: The place to learn about operations research with a focus on transportation. Currently under development by Jerrick Tram.
+  description: Navigating uncertainty with reality. Currently under development by Jerrick Tram.
   github_doc_repository: https://github.com/JerrickTram/ISE-OR-Docs
   github_repository: https://github.com/JerrickTram
   google_analytics_id: ''
