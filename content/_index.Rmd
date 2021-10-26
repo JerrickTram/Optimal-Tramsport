@@ -73,10 +73,9 @@ their disposal.
 * Integer Programming: @winston_2004, @kruk2018, @syndershen2019
 * Nonlinear Programming: @winston_2004
 * Stochastic Programming: @winston_2004, @syndershen2019
-* Forecasting: @winston_2004, @syndershen2019
+* Forecasting: @winston_2004, @syndershen2019, @hanck2020, @hyndman_athanasopoulos_2021
 * Dynamic Programming, Queuing Theory, and Simulations: @winston_2004, @halvorsen_2020
 * Combinatorial Optimization: @syndershen2019
-* Global Optimization
 * Probability and Statistics: @discover2012, @syndershen2019, @hyndman_athanasopoulos_2021, @kochenderfer2021
 
 ## References

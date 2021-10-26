@@ -1,6 +1,6 @@
 ---
 date: "2021-09-15"
-lastmod: "2021-10-14"
+lastmod: "2021-10-26"
 draft: false
 title: Systems of Linear Equations
 weight: 20
@@ -10,7 +10,7 @@ bibliography: references.bib
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>{{% notice warning %}}
+<p>{{% notice note %}}
 Disclaimer: None of the values used represent real-world examples.
 {{% /notice %}}</p>
 <div id="designing-a-system-of-linear-equations" class="section level2">
@@ -21,7 +21,7 @@ In most optimization problems, we want to find the best way to allocate
 resources to accomplish a goal. Not the largest/smallest nor longest/shortest
 way, but an <strong>optimal solution.</strong> In this example, a freight rail company wants
 to transport commodities <span class="math inline">\((x_1, x_2, x_3)\)</span> from one place to another while
-maximizing profits. However, they can’t transport entire inventories of each
+maximizing revenue. However, they can’t transport entire inventories of each
 commodity at once due to <strong>constraints (limitations, conditions, or restrictions):</strong></p>
 <ul>
 <li>An order of commodities <span class="math inline">\(x_1, x_2,\)</span> and <span class="math inline">\(x_3\)</span> weigh 1, 2, and 3 tons respectively
@@ -69,8 +69,8 @@ side (RHS), we have our constraints.</p>
   \end{bmatrix}
 \end{align}\]</span></p>
 <p>Matrix addition isn’t that much different from normal addition except that you’re
-going based on corresponding positions. For example, <span class="math inline">\(A_{1,1}\)</span> is only being added by
-<span class="math inline">\(B_{1,1}\)</span>. In this case, 1 is the element in <span class="math inline">\(A\)</span> and 5 is the element in <span class="math inline">\(B\)</span>.</p>
+going based on corresponding positions. For example, <span class="math inline">\(A_{11}\)</span> is only being added by
+<span class="math inline">\(B_{11}\)</span>. In this case, 1 is the element in <span class="math inline">\(A\)</span> and 5 is the element in <span class="math inline">\(B\)</span>.</p>
 <pre class="python"><code>import numpy as np
 
 A = np.matrix([[1, 2],
@@ -101,24 +101,47 @@ np.add(A, B)</code></pre>
 </div>
 <div id="matrix-multiplication" class="section level3">
 <h3>Matrix Multiplication</h3>
-<p>{{% notice note %}}
-Disclaimer: Pay extra attention in this section as many problems in OR involve
-some form of matrix multiplication.
+<p>{{% notice warning %}}
+Pay extra attention in this section as many problems in OR involve some form of
+matrix multiplication.
 {{% /notice %}}</p>
 <p>Matrix multiplication isn’t as straightforward as regular multiplication due to
 several conditions:</p>
 <ul>
-<li>The total columns in Matrix <span class="math inline">\(A\)</span> must equal the total rows in Matrix <span class="math inline">\(B\)</span></li>
-<li>The total rows from the final Matrix <span class="math inline">\(C\)</span> must equal the total rows in Matrix <span class="math inline">\(A\)</span></li>
-<li>The total columns from the final Matrix <span class="math inline">\(C\)</span> must equal the total columns in Matrix <span class="math inline">\(B\)</span></li>
+<li>The total columns in Matrix <span class="math inline">\(A\)</span> must equal the total rows in Matrix <span class="math inline">\(B\)</span>.</li>
+<li>The total rows from the final Matrix <span class="math inline">\(C\)</span> must equal the total rows in Matrix <span class="math inline">\(A\)</span>.</li>
+<li>The total columns from the final Matrix <span class="math inline">\(C\)</span> must equal the total columns in Matrix <span class="math inline">\(B\)</span>.</li>
 </ul>
+<details>
+<summary>
+Normal Explanation (click to expand)
+</summary>
 <p>In layman terms, an <span class="math inline">\(m \times n\)</span> matrix and an <span class="math inline">\(n \times p\)</span> matrix results in
 an <span class="math inline">\(m \times p\)</span> matrix. Because the order of the matrices matter, matrix
 multiplication isn’t “commutative.” If you tried to perform matrix
-multiplication with the matrices in a different order, an <span class="math inline">\(n \times p\)</span> matrix an
-<span class="math inline">\(m \times n\)</span> matrix results in an <span class="math inline">\(n \times n\)</span> matrix. To simplify this:
-<span class="math inline">\(AB = C \neq BA = C\)</span>. When finding the elements in <span class="math inline">\(C\)</span>, they’re based on
-<strong>dot product.</strong></p>
+multiplication with the matrices in a different order, an <span class="math inline">\(n \times p\)</span> matrix
+and an <span class="math inline">\(m \times n\)</span> matrix results in an <span class="math inline">\(n \times n\)</span> matrix. To simplify this:
+<span class="math inline">\(AB = C \neq BA = C\)</span>. When finding the elements in <span class="math inline">\(C\)</span>, you take the dot product
+of row and column vectors based on the ijth entries of a matrix.</p>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix}
+    a_{11} &amp; a_{12} &amp; a_{13} \\
+    a_{21} &amp; a_{22} &amp; a_{23} \\
+    a_{31} &amp; a_{32} &amp; a_{33} \\
+    a_{41} &amp; a_{42} &amp; a_{43}
+  \end{bmatrix}
+  \begin{bmatrix}
+    b_{11} &amp; b_{12} \\
+    b_{21} &amp; b_{22} \\
+    b_{31} &amp; b_{32}
+  \end{bmatrix} =
+  \begin{bmatrix}
+    c_{11} &amp; c_{12} \\
+    c_{21} &amp; c_{22} \\
+    c_{31} &amp; c_{32} \\
+    c_{41} &amp; c_{42}
+  \end{bmatrix}
+\end{align}\]</span></p>
 <pre class="python"><code>np.random.seed(1234)
 
 A = np.random.randint(20, size = (10, 3))
@@ -150,19 +173,21 @@ print(A)</code></pre>
 ##        [271, 161, 286, 210, 187],
 ##        [471, 387, 580, 456, 209],
 ##        [279, 297, 394, 318,  53]])</code></pre>
-<p><span class="math display">\[\begin{align}
-  A_{2,1}B_{1,3} + A_{2,2}B_{2,3} + \dots + A_{2,n}B_{m,3} &amp; = C_{2,3} \\
-  \begin{bmatrix}
-    12 &amp; 15 &amp; 17
-  \end{bmatrix} 
-  \begin{bmatrix}
-    11 \\
-    19 \\
-    17
-  \end{bmatrix} = 
-  12(11) + 15(19)+17(17) &amp; = 706 
-\end{align}\]</span></p>
-<p>Essentially, <strong>matrix multiplication is a set of linear combinations.</strong></p>
+<p>If we want to find the dot product at <span class="math inline">\(c_{21}\)</span>, we’d take the dot product of
+the 2nd row and the 1st column. Essentially, <strong>matrix multiplication is another way
+to notate linear combinations.</strong></p>
+</details>
+<details>
+<summary>
+Abstraction and Generalization Explanation (click to expand)
+</summary>
+<span class="math display">\[\begin{align}
+  A &amp; \in R^{m \times n} \\
+  B &amp; \in R^{n \times p} \\
+  C = AB &amp; \in R^{m \times p} \\
+  c_{ij} &amp; = \sum_{j = 1}^n a_{ij}b_{jk}
+\end{align}\]</span>
+</details>
 </div>
 </div>
 <div id="solving-a-system-of-linear-equations" class="section level2">
@@ -174,7 +199,7 @@ elementary row operations (EROs). For example, if I wanted to get rid of <span c
 2nd equation, I’d replace the 2nd equation by the sum of multiplying the 1st equation
 by -2 and the 2nd equation itself. You do this repeatedly until an equation has a
 single unknown. The final matrix after conducting EROs and back substitution
-leaves it in <strong>row echelon form (REF).</strong></p>
+leaves it in <strong>reduced echelon form (REF).</strong></p>
 <p><span class="math display">\[\begin{align}
   \left[\begin{array}{@{}ccc|c@{}}
     -2 &amp; -4 &amp; -6 &amp; -2500 \\
@@ -206,100 +231,159 @@ multiplying the 3rd equation by 3 (to eliminate <span class="math inline">\(x_2\
 plug in 200 into <span class="math inline">\(x_3\)</span> in equation 2 to solve for <span class="math inline">\(x_2\)</span> resulting in 100. Plug
 both values into their respective variables in equation 1 to get 450 for <span class="math inline">\(x_1\)</span>.
 As a result, <span class="math inline">\((x_1, x_2, x_3) = (450, 100, 200)\)</span>. As our systems of linear equations
-begin to scale in size, it isn’t practical to solve them by hand. Instead, we
-will use Python’s scientific computing capabilities.</p>
+begin to scale in size, it isn’t practical to solve them by hand. That’s why
+Python has <code>sympy</code> and <code>numpy.linalg</code> to obtain a matrix’s RREF.</p>
 <pre class="python"><code>import pandas as pd
+import sympy as sp
+import numpy.linalg as la
+
+# Method 1
+M = sp.Matrix([
+  [1, 2, 3, 1250],
+  [2, 1, 4, 1800],
+  [0, 1, 1, 300]
+])
+
+M.rref()</code></pre>
+<pre><code>## (Matrix([
+## [1, 0, 0, 450],
+## [0, 1, 0, 100],
+## [0, 0, 1, 200]]), (0, 1, 2))</code></pre>
+<pre class="python"><code># Method 2
 data = pd.read_csv(&#39;sample.csv&#39;)
-data.head()</code></pre>
+print(data)</code></pre>
 <pre><code>##       Commodity  Weight  Cars  Mixture
 ## 0          Coal       1     2        0
 ## 1    Intermodal       2     1        1
 ## 2  Agricultural       3     4        1</code></pre>
-<p>{{% notice info %}}
-The coefficient matrix is inversed to extract the coefficient values cleanly as lists.
-{{% /notice %}}</p>
-<pre class="python"><code>A = np.array([
-  list(data[&#39;Weight&#39;]),
-  list(data[&#39;Cars&#39;]),
-  list(data[&#39;Mixture&#39;])
-])
+<pre class="python"><code>## Swap rows and columns to fit system of linear equations mold
+aT = np.transpose(data.iloc[:, 1:]) 
+aT = np.matrix(aT)
 b = np.array([1250, 1800, 300])
 
-# Applies elementary row operations to a system of linear equations
+## Applies elementary row operations to a system of linear equations
 def eroLEQ(matrix, constraints):
   A = matrix
   b = constraints
   
-  # Check if the matrix has the same number of rows and columns
+  ### Check if the matrix has the same number of rows and columns
   if A.shape[0] == A.shape[1]:
-    # Note: linalg.solve only accepts square matrices in the 1st parameter
-    return np.linalg.solve(A, b)
+    #### la.solve only accepts square matrices in the 1st parameter
+    return la.solve(A, b)
   else:
-    # lstsq for non-square matrices
-    return np.linalg.lstsq(A, b, rcond = None)[0]
-eroLEQ(A, b)</code></pre>
+    #### la.lstsq for non-square matrices
+    return la.lstsq(A, b, rcond = None)[0]
+  
+eroLEQ(aT, b)</code></pre>
 <pre><code>## array([450., 100., 200.])</code></pre>
 </div>
-<div id="using-gurobi" class="section level2">
-<h2>Using Gurobi</h2>
-<pre class="python"><code>T = Model(&quot;Commodity&quot;)</code></pre>
+<div id="putting-it-all-together-in-gurobi" class="section level2">
+<h2>Putting it all Together in Gurobi</h2>
+<p>You probably want to know the purpose of the solution is. In OR, we want to
+find the unknown quantities for our decision variables leading to the
+best way to achieve organizational goals. For example, this unique solution
+is the optimal solution to maximize our <strong>objective function</strong> (i.e. revenue).</p>
+<ul>
+<li><span class="math inline">\(x_1\)</span> generates $1 per ton</li>
+<li><span class="math inline">\(x_2\)</span> generates $3 per ton</li>
+<li><span class="math inline">\(x_3\)</span> generates $4 per ton</li>
+</ul>
+<details>
+<summary>
+Normal Solution (click to expand)
+</summary>
+<p><span class="math display">\[\begin{align}
+  \text{Maximize} ~ x_1 + 3x_2 + 4x_3 ~ s.t. \\
+    x_1 + 2x_2 + 3x_3 &amp; = 1250 \\
+    2x_1 + x_2 + 4x_3 &amp; = 1800 \\
+    x_2 + x_3 &amp; = 300 \\
+    x_1, x_2, x_3 &amp; \geq 0
+\end{align}\]</span></p>
+<pre class="python"><code>import gurobipy as gp
+from gurobipy import GRB
+
+# Create model
+T = gp.Model(&quot;Commodity&quot;)
+
+# Create decision variables</code></pre>
 <pre><code>## Using license file C:\Users\Jerrick Tram\gurobi.lic</code></pre>
 <pre class="python"><code>x1 = T.addVar(name=&quot;Coal&quot;)
 x2 = T.addVar(name=&quot;Intermodal&quot;)
 x3 = T.addVar(name=&quot;Agricultural&quot;)
 
-T.setObjective(.01*x1 + .03*x2 + .04*x3, GRB.MAXIMIZE)
+# Set objective function
+T.setObjective(x1 + 3*x2 + 4*x3, gp.GRB.MAXIMIZE)
 
-T.addConstr(1*x1 + 2*x2 + 3*x3 == 1250, &quot;Weight&quot;)</code></pre>
+# Create constraints
+T.addConstr(x1 + 2*x2 + 3*x3 == 1250, &quot;Weight&quot;)</code></pre>
 <pre><code>## &lt;gurobi.Constr *Awaiting Model Update*&gt;</code></pre>
-<pre class="python"><code>T.addConstr(2*x1 + 1*x2 + 4*x3 == 1800, &quot;Capacity&quot;)</code></pre>
+<pre class="python"><code>T.addConstr(2*x1 + x2 + 4*x3 == 1800, &quot;Capacity&quot;)</code></pre>
 <pre><code>## &lt;gurobi.Constr *Awaiting Model Update*&gt;</code></pre>
-<pre class="python"><code>T.addConstr(1*x2 + 1*x3 == 300, &quot;Mixture&quot;)</code></pre>
+<pre class="python"><code>T.addConstr(x2 + x3 == 300, &quot;Mixture&quot;)
+
+# Find solution</code></pre>
 <pre><code>## &lt;gurobi.Constr *Awaiting Model Update*&gt;</code></pre>
-<pre class="python"><code>T.optimize()</code></pre>
+<pre class="python"><code>T.optimize()
+
+# Display solution</code></pre>
 <pre><code>## Gurobi Optimizer version 9.1.2 build v9.1.2rc0 (win64)
 ## Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
 ## Optimize a model with 3 rows, 3 columns and 8 nonzeros
-## Model fingerprint: 0x42f96496
+## Model fingerprint: 0xe22bba2c
 ## Coefficient statistics:
 ##   Matrix range     [1e+00, 4e+00]
-##   Objective range  [1e-02, 4e-02]
+##   Objective range  [1e+00, 4e+00]
 ##   Bounds range     [0e+00, 0e+00]
 ##   RHS range        [3e+02, 2e+03]
 ## Presolve removed 3 rows and 3 columns
 ## Presolve time: 0.01s
 ## Presolve: All rows and columns removed
 ## Iteration    Objective       Primal Inf.    Dual Inf.      Time
-##        0    1.5500000e+01   0.000000e+00   0.000000e+00      0s
+##        0    1.5500000e+03   0.000000e+00   0.000000e+00      0s
 ## 
-## Solved in 0 iterations and 0.02 seconds
-## Optimal objective  1.550000000e+01</code></pre>
+## Solved in 0 iterations and 0.01 seconds
+## Optimal objective  1.550000000e+03</code></pre>
 <pre class="python"><code>for i in T.getVars():
-  print(f&#39;{i.varName}: {i.x}.&#39;)
+  print(f&#39;{i.varName}: {int(i.x)} orders of {i.varName.lower()} products.&#39;)
   </code></pre>
-<pre><code>## Coal: 450.0.
-## Intermodal: 100.0.
-## Agricultural: 200.0.</code></pre>
-<pre class="python"><code>print(f&#39;Optimal total revenue: {T.objVal}.&#39;)</code></pre>
-<pre><code>## Optimal total revenue: 15.5.</code></pre>
+<pre><code>## Coal: 450 orders of coal products.
+## Intermodal: 100 orders of intermodal products.
+## Agricultural: 200 orders of agricultural products.</code></pre>
+<pre class="python"><code>print(f&#39;Optimal Total Revenue: ${int(T.objVal):,}&#39;)</code></pre>
+<pre><code>## Optimal Total Revenue: $1,550</code></pre>
+</details>
+<details>
+<summary>
+Abstracted and Generalized Formulation (click to expand)
+</summary>
+<span class="math display">\[\begin{align}
+    Max ~ &amp; \sum_{j =1}^n a_jx_j ~ s.t. \\
+    \sum_{j = 1}^n a_{ij}x_j &amp; = B_i, \forall i \in 1, \dots, m \\
+    x_j &amp; \geq 0, \forall j \in 1, \dots, n
+  \end{align}\]</span>
+</details>
+<p>The phrase <strong>“garbage in, garbage out”</strong> applies to OR modeling as a whole so its
+important to <strong>trust, but verify</strong> your data and solution. The next section
+covers how to do so.</p>
 </div>
 <div id="terminology" class="section level2">
 <h2>Terminology</h2>
 <ul>
-<li><strong>Optimal Solution:</strong> Any feasible solution that maximizes/minimizes the objective value.</li>
 <li><strong>Constraints</strong>: Restrictions on the quantities of decision variables
 available.</li>
-<li><strong>Decision Variables:</strong> Variables whose quantities affect the objective value
+<li><strong>Decision Variables:</strong> Variables whose quantities affect the objective function
 in a decision-making process.</li>
 <li><strong>Dot Product:</strong> The multiplication of two vectors with the same number of elements.</li>
-<li><strong>Row Echelon Form (REF):</strong> According to <span class="citation"><a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">Margalit and Rabinoff</a> (<a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">2019</a>)</span>, a matrix is in REF if:
+<li><strong>Objective Function:</strong> A function that looks to maximize/minimize some value.</li>
+<li><strong>Optimal Solution:</strong> Any feasible solution that maximizes/minimizes the objective value.</li>
+<li><strong>Reduced Echelon Form (REF):</strong> According to <span class="citation"><a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">Margalit and Rabinoff</a> (<a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">2019</a>)</span>, a matrix is in REF if:
 <ul>
 <li>All nonzero rows are above rows of all 0s.</li>
 <li>The leading nonzero entry of a row is to the <em>right</em> of the 1st nonzero entry of the row above.</li>
 <li>Below the pivot, all entries are 0.</li>
 </ul></li>
 <li><strong>Reduced Row Echelon Form (RREF):</strong> According to <span class="citation"><a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">Margalit and Rabinoff</a> (<a href="#ref-margalit_rabinoff_2019" role="doc-biblioref">2019</a>)</span>, a
-matrix is in RREF if it is in REF and:
+matrix is in RREF if its in REF and:
 <ul>
 <li>The pivot is equal to 1.</li>
 <li>The pivot is the <em>only</em> nonzero entry in its column.</li>

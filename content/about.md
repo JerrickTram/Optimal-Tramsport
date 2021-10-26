@@ -10,3 +10,6 @@ quantitative methodology to support better decision making. Even if this project
 is primarily focused on the transportation industry, the applications won't be 
 purely examples of getting from point A to point B. Some aspects such as freight 
 rate pricing and inventory management will be included as well.
+
+Jerrick Tram was previously a Navy Officer Candidate with over 5 years of 
+professional experience working with data in high school sports and transportation.
