@@ -1,0 +1,86 @@
+---
+title: "Work Scheduling Problems"
+lastmod: '2021-10-13T15:26:15Z'
+date: '2021-09-15T15:26:15Z'
+draft: no
+weight: 10
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="logistics-center-scheduling" class="section level2">
+<h2>Logistics Center Scheduling</h2>
+<p>When it comes to scheduling work shifts, the staff consists of employees. Typically,
+someone who works full-time will work 5 days a week. In addition, we also need to
+have a minimum amount of people to work a specific day of the week if the work
+site is a 24/7 operation (i.e. manufacturing plants). In this example, we’re
+scheduling employees in a logistics center with certain requirements:</p>
+<ul>
+<li>Each employee works 5 consecutive days before taking 2 consecutive days of
+rest</li>
+<li>There’s 7 shifts: Monday to Friday, Tuesday to Saturday, etc.</li>
+<li>We want to <strong>minimize</strong> the number of employees hired.</li>
+<li>The number of warehouse workers required for each day:</li>
+</ul>
+<pre><code>## The number of warehouse workers needed on Monday is 99.
+## The number of warehouse workers needed on Tuesday is 78.
+## The number of warehouse workers needed on Wednesday is 57.
+## The number of warehouse workers needed on Thursday is 50.
+## The number of warehouse workers needed on Friday is 55.
+## The number of warehouse workers needed on Saturday is 87.
+## The number of warehouse workers needed on Sunday is 52.</code></pre>
+<p>While you can assign 99 warehouse workers to start on Monday and 87 warehouse
+workers to start on Saturday, odds are that solution isn’t the best choice for
+our objective. Reason for that, you’ll have too slack/idle workers on days that
+overlap during those shifts (i.e. Monday, Tuesday, Wednesday).</p>
+<p><span class="math display">\[\begin{align}
+  Min ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 ~ s.t. \\
+    x_1 + x_4 + x_5 + x_6 + x_7 &amp; \geq b_1 \\
+    x_1 + x_2 + x_5 + x_6 + x_7 &amp; \geq b_2 \\
+    x_1 + x_2 + x_3 + x_6 + x_7 &amp; \geq b_3 \\
+    x_1 + x_2 + x_3 + x_4 + x_7 &amp; \geq b_4 \\
+    x_1 + x_2 + x_3 + x_4 + x_5 &amp; \geq b_5 \\
+    x_2 + x_3 + x_4 + x_5 + x_6 &amp; \geq b_6 \\
+    x_3 + x_4 + x_5 + x_6 + x_7 &amp; \geq b_7 \\
+    x_i \geq 0, \forall i \in \{1, 2, ..., 7\}
+\end{align}\]</span></p>
+<p>Most scheduling problems will have more decision variables/constraints than this
+for several reasons:</p>
+<ul>
+<li>Some employees are part-time</li>
+<li>Some employees may work multiple shifts (i.e. overtime)</li>
+<li>There’s regulations on how many consecutive shifts with overtime someone can do</li>
+<li>A percentage of workers in a certain shift cannot exceed some set limit</li>
+<li>A percentage of part-time workers cannot exceed a certain percentage</li>
+</ul>
+<p>Normally, the way to find the optimal solution mathematically is through
+elimination and/or substitution. In order to formulate larger scale scheduling
+problems, compact formulations are used for readability purposes and reducing
+redundancy.</p>
+<p><span class="math display">\[\begin{align}
+min ~ \sum_{i = 1}^7 (c_ix_i) ~ s.t. \\
+  \sum_i x_i &amp; \geq b_i \\
+  x_i  \geq 0, \forall i &amp; \in \{1, 2, ..., 7\}
+\end{align}\]</span></p>
+<pre class="python"><code>WarehouseStaffing(staffing)</code></pre>
+<pre><code>## Status: Optimal.
+## Total number of staff: 105.
+##                   Monday  Tuesday  Wednesday  Thursday  Friday  Saturday  \
+## Shift: Monday          1        1          1         1       1         0   
+## Shift: Tuesday         0        6          6         6       6         6   
+## Shift: Wednesday       0        0          0         0       0         0   
+## Shift: Thursday       27        0          0        27      27        27   
+## Shift: Friday         21       21          0         0      21        21   
+## Shift: Saturday       34       34         34         0       0        34   
+## Shift: Sunday         16       16         16        16       0         0   
+## 
+##                   Sunday  
+## Shift: Monday          0  
+## Shift: Tuesday         0  
+## Shift: Wednesday       0  
+## Shift: Thursday       27  
+## Shift: Friday         21  
+## Shift: Saturday       34  
+## Shift: Sunday         16</code></pre>
+</div>

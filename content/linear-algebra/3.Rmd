@@ -1,7 +1,0 @@
----
-date: "2021-09-15"
-lastmod: "2021-10-14"
-draft: false
-title: Determinants
-weight: 40
----

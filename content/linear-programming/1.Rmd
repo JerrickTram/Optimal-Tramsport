@@ -1,0 +1,143 @@
+---
+title: "Work Scheduling Problems"
+lastmod: '2021-10-13T15:26:15Z'
+date: '2021-09-15T15:26:15Z'
+draft: no
+weight: 10
+---
+
+## Logistics Center Scheduling
+
+When it comes to scheduling work shifts, the staff consists of employees. Typically, 
+someone who works full-time will work 5 days a week. In addition, we also need to 
+have a minimum amount of people to work a specific day of the week if the work 
+site is a 24/7 operation (i.e. manufacturing plants). In this example, we're 
+scheduling employees in a logistics center with certain requirements:
+
+* Each employee works 5 consecutive days before taking 2 consecutive days of
+rest
+* There's 7 shifts: Monday to Friday, Tuesday to Saturday, etc.
+* We want to **minimize** the number of employees hired.
+* The number of warehouse workers required for each day:
+
+```{python, echo = F}
+import random
+
+random.seed(1234)
+
+staffing = random.sample(range(50, 100), 7)
+dow = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+for i,j in zip(staffing, dow):
+  print(f'The number of warehouse workers needed on {j} is {i}.')
+```
+
+While you can assign 99 warehouse workers to start on Monday and 87 warehouse 
+workers to start on Saturday, odds are that solution isn't the best choice for
+our objective. Reason for that, you'll have too slack/idle workers on days that 
+overlap during those shifts (i.e. Monday, Tuesday, Wednesday).
+
+\begin{align}
+  Min ~ x_1 + x_2 + x_3 + x_4 + x_5 + x_6 + x_7 ~ s.t. \\
+    x_1 + x_4 + x_5 + x_6 + x_7 & \geq b_1 \\
+    x_1 + x_2 + x_5 + x_6 + x_7 & \geq b_2 \\
+    x_1 + x_2 + x_3 + x_6 + x_7 & \geq b_3 \\
+    x_1 + x_2 + x_3 + x_4 + x_7 & \geq b_4 \\
+    x_1 + x_2 + x_3 + x_4 + x_5 & \geq b_5 \\
+    x_2 + x_3 + x_4 + x_5 + x_6 & \geq b_6 \\
+    x_3 + x_4 + x_5 + x_6 + x_7 & \geq b_7 \\
+    x_i \geq 0, \forall i \in \{1, 2, ..., 7\}
+\end{align}
+
+Most scheduling problems will have more decision variables/constraints than this 
+for several reasons:
+
+* Some employees are part-time
+* Some employees may work multiple shifts (i.e. overtime)
+* There's regulations on how many consecutive shifts with overtime someone can do
+* A percentage of workers in a certain shift cannot exceed some set limit
+* A percentage of part-time workers cannot exceed a certain percentage
+
+Normally, the way to find the optimal solution mathematically is through 
+elimination and/or substitution. In order to formulate larger scale scheduling 
+problems, compact formulations are used for readability purposes and reducing
+redundancy.
+
+\begin{align}
+min ~ \sum_{i = 1}^7 (c_ix_i) ~ s.t. \\
+  \sum_i x_i & \geq b_i \\
+  x_i  \geq 0, \forall i & \in \{1, 2, ..., 7\}
+\end{align}
+
+```{python Scheduling.py, echo=F}
+## Prepare Parameters
+import pandas as pd
+from pulp import *
+import matplotlib.pyplot as plt
+from itertools import chain, repeat
+
+def WarehouseStaffing(constraints):
+  def ncycles(iterable, n):
+    "Returns the sequence elements n times"
+    return chain.from_iterable(repeat(tuple(iterable), n))
+  
+  # Staff Needs Per Day
+  n_staff = constraints
+  
+  # Days of Week
+  days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  
+  # Circular list of days
+  n_days = [i for i in range(7)]
+  n_days_c = list(ncycles(n_days, 3))
+  
+  # Working days
+  list_in = [[n_days_c[j] for j in range(i, i + 5)] for i in n_days_c]
+  
+  # Workers off by shift for each day
+  list_excl = [[n_days_c[j] for j in range(i + 1, i + 3)] for i in n_days_c]
+  
+  ## Initialize Model, Define Objective Function, and Add Constraints
+  # Initialize Model
+  model = LpProblem('Minimize_Staffing', LpMinimize)
+  
+  # Create Decision Variables
+  start_days = ['Shift: ' + i for i in days]
+  x = LpVariable.dicts('shift', n_days, lowBound = 0, cat = 'Integer')
+  
+  # Define Objective Function
+  model += lpSum(x[i] for i in n_days)
+  
+  # Add Constraints
+  for d, l_excl, staff in zip(n_days, list_excl, n_staff):
+    model += lpSum([x[i] for i in n_days if i not in l_excl]) >= staff
+  
+  ## Solve Model and Analyze Results
+  # Solve Model
+  model.solve()
+  
+  # Status of Solution
+  print(f'Status: {LpStatus[model.status]}.')
+  
+  # How many workers per day?
+  dct_work = {}
+  for v in model.variables():
+    dct_work[int(v.name[-1])] = int(v.varValue)
+    
+  # Show Detailed Sizing per Day
+  dict_sch = {}
+  for day in dct_work.keys():
+    dict_sch[day] = [dct_work[day] if i in list_in[day] else 0 for i in n_days]
+  df_sch = pd.DataFrame(dict_sch).T
+  df_sch.columns = days
+  df_sch.index = start_days
+  
+  # Optimized Objective Value
+  print(f'Total number of staff: {int(value(model.objective))}.')
+  pd.set_option("display.max_rows", None, "display.max_columns", len(df_sch.columns))
+  print(df_sch)
+```
+
+```{python}  
+WarehouseStaffing(staffing)
+```
